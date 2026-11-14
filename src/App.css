@@ -1,0 +1,383 @@
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
+  min-height: 100svh;
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 20px;
+  padding-top: 16px;
+}
+
+/* ---------- ホーム ---------- */
+.app-title {
+  font-size: 3rem;
+  text-align: center;
+  margin: 16px 0 0;
+  color: #333;
+}
+
+.home-lead {
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 0;
+  color: #555;
+}
+
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.category-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 24px 16px;
+  border: 3px solid rgba(0, 0, 0, 0.08);
+  border-radius: 24px;
+  cursor: pointer;
+  font-family: inherit;
+  color: #333;
+  transition: transform 0.1s ease;
+}
+
+.category-card:active {
+  transform: scale(0.98);
+}
+
+.category-icon {
+  font-size: 4rem;
+  line-height: 1.2;
+}
+
+.category-name {
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.category-desc {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+/* ---------- 難易度えらび ---------- */
+.difficulty-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.difficulty-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 22px 16px;
+  border: 3px solid rgba(0, 0, 0, 0.08);
+  border-radius: 24px;
+  cursor: pointer;
+  font-family: inherit;
+  color: #333;
+  min-height: 88px;
+}
+
+.difficulty-button:active {
+  transform: scale(0.98);
+}
+
+.difficulty-name {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.difficulty-desc {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+/* ---------- クイズ ---------- */
+.quiz-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.small-button {
+  font-family: inherit;
+  font-size: 1.1rem;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 2px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  color: #333;
+}
+
+.quiz-total-score {
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 0;
+  color: #777;
+}
+
+.quiz-question {
+  font-size: 2rem;
+  line-height: 1.4;
+  text-align: center;
+  margin: 0;
+  color: #333;
+}
+
+.quiz-visual {
+  font-size: 7rem;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.quiz-flag {
+  display: flex;
+  justify-content: center;
+}
+
+.quiz-flag-img {
+  width: min(480px, 88vw);
+  height: auto;
+  border: 3px solid rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  background: #fff;
+}
+
+/* ---------- こっき ずかん ---------- */
+.guide-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.guide-chip {
+  font-family: inherit;
+  font-size: 1.1rem;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 2px solid #d0d7e5;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+}
+
+.guide-chip.is-active {
+  background: #ffb703;
+  border-color: #ffb703;
+  font-weight: 700;
+}
+
+.guide-search {
+  font-family: inherit;
+  font-size: 1.2rem;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 2px solid #d0d7e5;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.guide-count {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #555;
+  margin: 0;
+}
+
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 14px;
+}
+
+.guide-item {
+  margin: 0;
+  text-align: center;
+  background: #fff;
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  padding: 12px 8px;
+}
+
+.guide-flag {
+  width: 100%;
+  max-width: 160px;
+  height: auto;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+}
+
+.guide-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #333;
+  margin-top: 6px;
+}
+
+.guide-yomi {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.guide-empty {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 480px) {
+  .choices {
+    grid-template-columns: 1fr;
+  }
+}
+
+.choice-button {
+  font-family: inherit;
+  font-size: 1.9rem;
+  font-weight: 700;
+  padding: 22px 12px;
+  border-radius: 20px;
+  border: 3px solid #d0d7e5;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+  min-height: 88px;
+}
+
+.choice-button:active {
+  transform: scale(0.98);
+}
+
+.choice-button.is-answer {
+  background: #d9f7d9;
+  border-color: #4caf50;
+}
+
+.choice-button.is-wrong {
+  background: #ffe1e1;
+  border-color: #e57373;
+}
+
+.feedback {
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.feedback.is-correct {
+  background: #eefbee;
+}
+
+.feedback.is-incorrect {
+  background: #fff4f4;
+}
+
+.feedback-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0;
+  color: #333;
+}
+
+.feedback-explanation {
+  font-size: 1.2rem;
+  margin: 0;
+  color: #555;
+}
+
+/* ---------- 結果 ---------- */
+.result {
+  text-align: center;
+  align-items: center;
+}
+
+.result-emoji {
+  font-size: 5rem;
+  line-height: 1.2;
+}
+
+.result-title {
+  font-size: 2.4rem;
+  margin: 0;
+  color: #333;
+}
+
+.result-stars {
+  font-size: 2.2rem;
+  margin: 0;
+  letter-spacing: 4px;
+}
+
+.result-score {
+  font-size: 1.8rem;
+  margin: 0;
+  color: #333;
+}
+
+.result-total {
+  font-size: 1.3rem;
+  margin: 0;
+  color: #555;
+}
+
+.result-praise {
+  font-size: 1.4rem;
+  margin: 0;
+  color: #555;
+}
+
+.result-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 420px;
+}
+
+/* ---------- 共通ボタン ---------- */
+.big-button {
+  font-family: inherit;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 18px 28px;
+  border-radius: 999px;
+  border: none;
+  background: #ffb703;
+  color: #333;
+  cursor: pointer;
+  min-height: 64px;
+}
+
+.big-button.secondary {
+  background: #e8ecf3;
+}
+
+.big-button:active {
+  transform: scale(0.98);
+}
