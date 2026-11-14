@@ -1,4 +1,4 @@
-import type { CategoryQuiz } from '../types';
+import type { CategoryQuiz } from '../../types';
 import { defaultDifficulties } from './difficulties';
 
 /** ひらがなクイズ：文字と、ことばの最初の文字の問題（12問） */

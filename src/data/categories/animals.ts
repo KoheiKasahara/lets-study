@@ -1,4 +1,4 @@
-import type { CategoryQuiz } from '../types';
+import type { CategoryQuiz } from '../../types';
 import { defaultDifficulties } from './difficulties';
 
 /** どうぶつクイズ：名前・鳴き声・特徴の易しい問題（12問） */

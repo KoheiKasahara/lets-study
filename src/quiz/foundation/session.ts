@@ -63,6 +63,8 @@ export interface QuizSession {
   blockSize: number;
   /** 難易度で絞り込んだ後のプール総数 */
   poolSize: number;
+  /** 難易度で絞り込んだ後のプール全体（誤答の抽選元。出題が進んでも減らない） */
+  pool: readonly QuizQuestion[];
   /** まだ出題していない問題（シャッフル済みのキュー） */
   remaining: readonly QuizQuestion[];
   /** 出題済み問題のキー一覧 */
@@ -99,6 +101,7 @@ export function createSession(
     difficulty,
     blockSize: options.blockSize ?? definition.blockSize ?? DEFAULT_BLOCK_SIZE,
     poolSize: pool.length,
+    pool,
     remaining: shuffle(pool, random),
     usedKeys: [],
     blockResults: [],
@@ -120,8 +123,7 @@ export function nextBlock(
   if (session.remaining.length === 0) return null;
   const taken = session.remaining.slice(0, session.blockSize);
   const rest = session.remaining.slice(taken.length);
-  const pool = [...taken, ...rest];
-  const block = taken.map((q) => prepareQuestion(q, session.difficulty, pool, random));
+  const block = taken.map((q) => prepareQuestion(q, session.difficulty, session.pool, random));
   return {
     session: {
       ...session,
@@ -193,8 +195,9 @@ export function countBlockCorrect(
 
 /**
  * 1問を出題用に整形する。
- * 難易度の choiceCount が問題本来の選択肢数より小さい場合は、
- * 正解＋誤答（pickDistractors があればそれ、なければ問題自身の誤答から抽選）に絞る。
+ * - 表示する選択肢数は、難易度の choiceCount（問題本来の選択肢数が上限）
+ * - 誤答は pickDistractors があればその結果を優先し、不足分は問題自身の誤答から抽選して補う
+ * - 選択肢の並びは毎回シャッフルする
  */
 export function prepareQuestion(
   question: QuizQuestion,
@@ -203,34 +206,23 @@ export function prepareQuestion(
   random: RandomFn = Math.random,
 ): PreparedQuestion {
   const answer = question.choices[question.answerIndex];
-  const target = Math.min(
-    difficulty.choiceCount ?? question.choices.length,
-    question.choices.length,
-  );
+  const total = question.choices.length;
+  const target = Math.max(1, Math.min(difficulty.choiceCount ?? total, total));
+  const needed = target - 1;
 
-  let choices: string[];
-  if (target >= question.choices.length) {
-    choices = shuffle(question.choices, random);
-  } else {
-    const needed = Math.max(0, target - 1);
-    let distractors: string[] = [];
-    if (difficulty.pickDistractors) {
-      const picked = difficulty.pickDistractors({ question, pool, count: needed, random });
-      // 正解と重複するもの・問題に存在しない選択肢は除外し、不足分は既定の抽選で補う
-      distractors = [...new Set(picked)].filter((c) => c !== answer);
-    }
-    if (distractors.length < needed) {
-      const others = question.choices.filter((_, i) => i !== question.answerIndex);
-      const extra = shuffle(
-        others.filter((c) => !distractors.includes(c)),
-        random,
-      );
-      distractors = [...distractors, ...extra].slice(0, needed);
-    } else {
-      distractors = distractors.slice(0, needed);
-    }
-    choices = shuffle([answer, ...distractors], random);
+  let distractors: string[] = [];
+  if (difficulty.pickDistractors) {
+    const picked = difficulty.pickDistractors({ question, pool, count: needed, random });
+    // 重複と、正解と同じ文言は取り除く
+    distractors = [...new Set(picked)].filter((c) => c !== answer).slice(0, needed);
   }
+  if (distractors.length < needed) {
+    const own = question.choices.filter(
+      (c, i) => i !== question.answerIndex && !distractors.includes(c),
+    );
+    distractors = [...distractors, ...shuffle(own, random)].slice(0, needed);
+  }
+  const choices = shuffle([answer, ...distractors], random);
 
   return {
     key: questionKeyOf(question),

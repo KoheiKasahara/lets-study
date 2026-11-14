@@ -1,4 +1,4 @@
-import type { CategoryQuiz } from '../types';
+import type { CategoryQuiz } from '../../types';
 import { defaultDifficulties } from './difficulties';
 
 /** たべものクイズ：食べ物の名前の基本問題（12問） */

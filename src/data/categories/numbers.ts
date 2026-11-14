@@ -1,4 +1,4 @@
-import type { CategoryQuiz } from '../types';
+import type { CategoryQuiz } from '../../types';
 import { defaultDifficulties } from './difficulties';
 
 /** かずクイズ：数を数える・数字の基本問題（12問） */

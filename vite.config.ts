@@ -1,5 +1,5 @@
-import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vitest/config'
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vitest/config';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -8,7 +8,8 @@ export default defineConfig({
   base: process.env.VITE_BASE ?? '/',
   plugins: [react()],
   test: {
+    // 既定は node。画面のテストだけファイル先頭の `// @vitest-environment jsdom` で切り替える
     environment: 'node',
     include: ['src/**/*.test.{ts,tsx}'],
   },
-})
+});

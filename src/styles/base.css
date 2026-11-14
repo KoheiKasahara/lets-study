@@ -1,0 +1,128 @@
+/* 全画面共通の土台：リセット・アプリ枠・共通ボタン */
+:root {
+  font-family: 'Hiragino Maru Gothic ProN', 'Hiragino Sans', 'Noto Sans JP', system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-bg);
+  color-scheme: light;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+h1,
+h2,
+p,
+figure {
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* ---------- アプリ枠 ---------- */
+.app {
+  max-width: var(--app-max-width);
+  min-height: 100dvh;
+  margin: 0 auto;
+  /* ノッチ・ホームバーを避ける（index.html の viewport-fit=cover とセット） */
+  padding: max(var(--space-4), env(safe-area-inset-top))
+    max(var(--space-4), env(safe-area-inset-right)) max(var(--space-4), env(safe-area-inset-bottom))
+    max(var(--space-4), env(safe-area-inset-left));
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.screen-title {
+  font-size: var(--font-l);
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* ---------- 共通ボタン ---------- */
+.button {
+  min-height: var(--tap-min);
+  padding: 14px 28px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary);
+  font-size: var(--font-m);
+  font-weight: 700;
+  transition: transform 0.1s ease;
+}
+
+.button:active,
+.card-button:active {
+  transform: scale(0.98);
+}
+
+.button--secondary {
+  background: var(--color-secondary);
+}
+
+.button--small {
+  padding: 8px 16px;
+  border: 2px solid var(--color-border);
+  background: var(--color-surface);
+  font-size: var(--font-s);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+/* カテゴリ・難易度などの「大きなカード型ボタン」 */
+.card-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  min-height: var(--tap-large);
+  padding: var(--space-4) var(--space-3);
+  border: 3px solid var(--color-border-soft);
+  border-radius: var(--radius-m);
+  background: var(--color-surface);
+  text-align: center;
+  transition: transform 0.1s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .card-button {
+    transition: none;
+  }
+}

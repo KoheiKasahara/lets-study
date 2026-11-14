@@ -37,7 +37,7 @@ export interface Question {
   tags?: string[];
   /**
    * 問題のグループ（任意。例：国旗クイズの地域）。
-   * 難易度の sameGroupDistractors と組み合わせて使う。
+   * 難易度の distractors: 'same-group' と組み合わせて使う。
    */
   group?: string;
   /** 国旗SVGの国コード（任意）。国旗クイズの生成問題でのみ使う */
@@ -64,11 +64,17 @@ export interface QuizDifficulty {
    */
   poolTag?: string;
   /**
-   * 誤答を同じグループの問題から選ぶ（任意）。
-   * 例：国旗クイズの「むずかしい」で、同じ地域の国を選択肢に混ぜる。
+   * 誤答（まちがいの選択肢）の選び方（任意。省略時は 'own'）。
+   * - 'own'：その問題に書いた選択肢から選ぶ
+   * - 'pool'：出題プール内の他の問題の正解から選ぶ（毎回ちがう組み合わせになる）
+   * - 'same-group'：同じ group の問題の正解から選ぶ（例：同じ地域の国。まぎらわしくなる）
+   * 'pool' と 'same-group' で足りない分は、問題自身の選択肢で補われる。
    */
-  sameGroupDistractors?: boolean;
+  distractors?: 'own' | 'pool' | 'same-group';
 }
+
+/** 1問あたりの選択肢の数（Question.choices の長さ） */
+export const CHOICES_PER_QUESTION = 4;
 
 /** カテゴリとその問題集のセット */
 export interface CategoryQuiz {

@@ -1,0 +1,76 @@
+.result {
+  align-items: center;
+  text-align: center;
+}
+
+.result__summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.result__emoji {
+  font-size: clamp(3rem, 16dvh, 5rem);
+  line-height: 1.2;
+}
+
+/* ⭐10個が1行に収まる大きさにする */
+.result__stars {
+  font-size: clamp(1.1rem, 6vw, 2.2rem);
+  white-space: nowrap;
+}
+
+.result__score {
+  font-size: var(--font-l);
+}
+
+.result__total,
+.result__praise {
+  font-size: var(--font-m);
+  color: var(--color-text-sub);
+}
+
+.result__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 420px;
+}
+
+/* 横長：左に結果、右にボタン */
+@media (orientation: landscape) and (min-width: 560px) {
+  .result {
+    flex-direction: row;
+    justify-content: center;
+    min-height: calc(100dvh - 2 * var(--space-4));
+  }
+
+  .result__summary {
+    flex: 1;
+  }
+
+  .result__stars {
+    font-size: clamp(1.1rem, 3vw, 2.2rem);
+  }
+
+  .result__buttons {
+    flex: 0 1 340px;
+  }
+}
+
+/* 高さが足りない画面では飾りを省き、結果とボタンを1画面に収める */
+@media (max-height: 480px) {
+  .result__emoji {
+    display: none;
+  }
+
+  .result__summary {
+    gap: var(--space-2);
+  }
+
+  .result__score {
+    font-size: var(--font-m);
+  }
+}

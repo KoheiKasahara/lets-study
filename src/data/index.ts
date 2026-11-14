@@ -1,14 +1,14 @@
 import type { CategoryQuiz } from '../types';
-import { flagsQuiz } from './flags';
-import { animalsQuiz } from './animals';
-import { foodsQuiz } from './foods';
-import { colorsQuiz } from './colors';
-import { numbersQuiz } from './numbers';
-import { hiraganaQuiz } from './hiragana';
+import { animalsQuiz } from './categories/animals';
+import { colorsQuiz } from './categories/colors';
+import { flagsQuiz } from './categories/flags';
+import { foodsQuiz } from './categories/foods';
+import { hiraganaQuiz } from './categories/hiragana';
+import { numbersQuiz } from './categories/numbers';
 
 /**
- * 全カテゴリの一覧（スペース版と同じ6種）。
- * カテゴリを増やすときは、ここに CategoryQuiz を追加するだけ。
+ * 全カテゴリの一覧（ホーム画面にこの順で並ぶ）。
+ * カテゴリを増やすときは、src/data/categories/ にファイルを足してここに追加するだけ。
  */
 export const allQuizzes: CategoryQuiz[] = [
   flagsQuiz,

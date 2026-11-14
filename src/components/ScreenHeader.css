@@ -1,0 +1,22 @@
+.screen-header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-s);
+  color: var(--color-text-sub);
+}
+
+.screen-header > :first-child {
+  justify-self: start;
+}
+
+.screen-header__title {
+  font-weight: 700;
+  text-align: center;
+}
+
+.screen-header__aside {
+  justify-self: end;
+  text-align: right;
+}
