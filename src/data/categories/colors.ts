@@ -1,4 +1,4 @@
-import type { CategoryQuiz } from '../types';
+import type { CategoryQuiz } from '../../types';
 import { defaultDifficulties } from './difficulties';
 
 /** いろクイズ：色の基本問題（12問） */

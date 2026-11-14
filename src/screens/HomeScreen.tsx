@@ -1,4 +1,5 @@
 import type { CategoryQuiz } from '../types';
+import './HomeScreen.css';
 
 interface Props {
   quizzes: CategoryQuiz[];
@@ -10,28 +11,28 @@ interface Props {
 export function HomeScreen({ quizzes, onSelect, onOpenGuide }: Props) {
   return (
     <div className="screen home">
-      <h1 className="app-title">レッツスタディ</h1>
-      <p className="home-lead">すきな クイズを えらんでね！</p>
-      <button type="button" className="big-button secondary" onClick={onOpenGuide}>
-        🚩 こっき ずかん（せかいの はたを みる）
-      </button>
-      <div className="category-list">
+      <h1 className="home__title">レッツスタディ</h1>
+      <p className="home__lead">すきな クイズを えらんでね！</p>
+      <div className="home__categories">
         {quizzes.map((quiz) => (
           <button
             key={quiz.category.id}
             type="button"
-            className="category-card"
+            className="card-button"
             style={{ backgroundColor: quiz.category.color }}
             onClick={() => onSelect(quiz)}
           >
-            <span className="category-icon" aria-hidden="true">
+            <span className="home__category-icon" aria-hidden="true">
               {quiz.category.icon}
             </span>
-            <span className="category-name">{quiz.category.name}</span>
-            <span className="category-desc">{quiz.category.description}</span>
+            <span className="home__category-name">{quiz.category.name}</span>
+            <span className="home__category-desc">{quiz.category.description}</span>
           </button>
         ))}
       </div>
+      <button type="button" className="button button--secondary" onClick={onOpenGuide}>
+        🚩 こっき ずかん
+      </button>
     </div>
   );
 }

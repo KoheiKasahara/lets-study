@@ -1,0 +1,162 @@
+.quiz {
+  gap: var(--space-3);
+}
+
+.quiz__status {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  font-size: var(--font-s);
+  color: var(--color-text-sub);
+}
+
+/* 縦長：問題 → 選択肢を縦に積む */
+.quiz__body {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.quiz__prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.quiz__visual {
+  font-size: var(--font-emoji);
+  line-height: 1.2;
+}
+
+/* 国旗は 4:3。画面の高さに合わせて縮め、選択肢が画面内に収まるようにする */
+.quiz__flag {
+  height: clamp(110px, 34dvh, 300px);
+  max-width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  border: 3px solid var(--color-border-soft);
+  border-radius: var(--radius-s);
+  background: var(--color-surface);
+}
+
+/* 答え合わせ中は絵・国旗を小さくして、答え合わせの帯が選択肢に重ならないようにする */
+.quiz.is-answered .quiz__flag {
+  height: clamp(80px, 16dvh, 200px);
+}
+
+.quiz.is-answered .quiz__visual {
+  font-size: clamp(2.5rem, 10dvh, 5rem);
+}
+
+/* 選択肢は常に2列。文字サイズは選択肢エリアの幅に追従させる（コンテナクエリ単位） */
+.quiz__choices {
+  container-type: inline-size;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  align-content: center;
+}
+
+.quiz__choice {
+  min-height: var(--tap-large);
+  padding: var(--space-2);
+  border: 3px solid var(--color-border);
+  border-radius: var(--radius-m);
+  background: var(--color-surface);
+  font-weight: 700;
+  line-height: 1.3;
+  transition: transform 0.1s ease;
+}
+
+.quiz__choice-text {
+  font-size: clamp(1rem, 6.5cqi, 1.9rem);
+  overflow-wrap: anywhere;
+}
+
+.quiz__choice:active {
+  transform: scale(0.98);
+}
+
+.quiz__choice:disabled {
+  cursor: default;
+  color: var(--color-text);
+}
+
+.quiz__choice.is-answer {
+  background: var(--color-correct-bg);
+  border-color: var(--color-correct);
+}
+
+.quiz__choice.is-wrong {
+  background: var(--color-wrong-bg);
+  border-color: var(--color-wrong);
+}
+
+/* 答え合わせ：画面からはみ出すときは下端に貼り付き、スクロールなしで「つぎへ」を押せる */
+.quiz__feedback {
+  position: sticky;
+  bottom: max(var(--space-2), env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 3px solid;
+  border-radius: var(--radius-m);
+  text-align: center;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 0.12);
+}
+
+.quiz__feedback.is-correct {
+  background: var(--color-correct-soft);
+  border-color: var(--color-correct);
+}
+
+.quiz__feedback.is-incorrect {
+  background: var(--color-wrong-soft);
+  border-color: var(--color-wrong);
+}
+
+.quiz__feedback-title {
+  font-size: var(--font-m);
+  font-weight: 700;
+}
+
+.quiz__feedback-explanation {
+  font-size: var(--font-s);
+  color: var(--color-text-sub);
+}
+
+/* 横長（横向きスマホ・タブレット・PC）：左に問題、右に選択肢 */
+@media (orientation: landscape) and (min-width: 560px) {
+  .quiz__body {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+
+  .quiz__flag {
+    height: clamp(110px, 46dvh, 340px);
+  }
+
+  .quiz.is-answered .quiz__flag {
+    height: clamp(70px, 24dvh, 260px);
+  }
+
+  .quiz__feedback {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .quiz__feedback .button {
+    flex-shrink: 0;
+  }
+}
+
+/* 高さが足りない画面では解説を省く（正解は帯の見出しと選択肢の色で分かる） */
+@media (max-height: 480px) {
+  .quiz__feedback-explanation {
+    display: none;
+  }
+}

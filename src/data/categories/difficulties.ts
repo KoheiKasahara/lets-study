@@ -1,4 +1,4 @@
-import type { QuizDifficulty } from '../types';
+import type { QuizDifficulty } from '../../types';
 
 /** 多くのカテゴリで共通に使う難易度3段階（選択肢の数で調整） */
 export const defaultDifficulties: QuizDifficulty[] = [

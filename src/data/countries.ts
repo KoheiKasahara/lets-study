@@ -1,11 +1,29 @@
 /**
  * 世界の国データ（国連加盟193か国＋バチカン・パレスチナ＝全195か国）。
- * 国旗SVGは src/assets/flags/{code}.svg（flag-icons 由来）に対応する。
+ * 国旗SVGは public/flags/{code}.svg（flag-icons 由来）に対応する。
  */
 
-export type Region = 'アジア' | 'ヨーロッパ' | 'アフリカ' | '北アメリカ' | '南アメリカ' | 'オセアニア';
+export type Region =
+  'アジア' | 'ヨーロッパ' | 'アフリカ' | '北アメリカ' | '南アメリカ' | 'オセアニア';
 
-export const REGIONS: Region[] = ['アジア', 'ヨーロッパ', 'アフリカ', '北アメリカ', '南アメリカ', 'オセアニア'];
+export const REGIONS: Region[] = [
+  'アジア',
+  'ヨーロッパ',
+  'アフリカ',
+  '北アメリカ',
+  '南アメリカ',
+  'オセアニア',
+];
+
+/** 地域名のこども向け表記（画面にはこちらを出す） */
+export const REGION_LABELS: Record<Region, string> = {
+  アジア: 'アジア',
+  ヨーロッパ: 'ヨーロッパ',
+  アフリカ: 'アフリカ',
+  北アメリカ: 'きたアメリカ',
+  南アメリカ: 'みなみアメリカ',
+  オセアニア: 'オセアニア',
+};
 
 export interface Country {
   /** ISO 3166-1 alpha-2 コード（旗SVGのファイル名と一致） */
@@ -22,11 +40,30 @@ export interface Country {
 
 /** 「やさしい」プールにする有名な24か国 */
 const FAMOUS_CODES = new Set([
-  'jp', 'cn', 'kr', 'in', 'th', 'vn', 'id',
-  'us', 'ca', 'mx', 'br', 'ar',
-  'gb', 'fr', 'de', 'it', 'es', 'ru', 'se',
-  'au', 'nz',
-  'eg', 'za', 'ke',
+  'jp',
+  'cn',
+  'kr',
+  'in',
+  'th',
+  'vn',
+  'id',
+  'us',
+  'ca',
+  'mx',
+  'br',
+  'ar',
+  'gb',
+  'fr',
+  'de',
+  'it',
+  'es',
+  'ru',
+  'se',
+  'au',
+  'nz',
+  'eg',
+  'za',
+  'ke',
 ]);
 
 type Row = [code: string, name: string, yomi: string];

@@ -2,7 +2,13 @@ name: CI
 
 on:
   push:
+    branches: [main]
   pull_request:
+
+# 同じブランチ・PRで新しい実行が始まったら古い実行は止める
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -18,11 +24,15 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version-file: .nvmrc
           cache: npm
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Format check
+        id: format
+        run: npm run format:check
 
       - name: Lint
         id: lint
@@ -34,19 +44,20 @@ jobs:
           set -o pipefail
           npm run test 2>&1 | tee test-output.txt
 
-      - name: Build
+      - name: Build (型チェック + Vite ビルド)
         id: build
         run: npm run build
 
       - name: Write summary
         if: always()
         run: |
-          TEST_LINE=$(grep -E 'Tests +[0-9]+ (passed|failed)' test-output.txt | tail -1 || true)
+          TEST_LINE=$(test -f test-output.txt && grep -E 'Tests +[0-9]+ (passed|failed)' test-output.txt | tail -1 || true)
           {
             echo "## CI サマリ"
             echo ""
             echo "| 項目 | 結果 |"
             echo "| --- | --- |"
+            echo "| Format (Prettier) | ${{ steps.format.outcome }} |"
             echo "| Lint (oxlint) | ${{ steps.lint.outcome }} |"
             echo "| Test (Vitest) | ${{ steps.test.outcome }} |"
             echo "| Build (tsc + vite) | ${{ steps.build.outcome }} |"

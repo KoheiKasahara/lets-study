@@ -12,23 +12,40 @@
 
 ## いまあるカテゴリ
 
-| カテゴリ | 内容 | 問題数 |
-| --- | --- | --- |
-| 🚩 こっき | 世界の国の旗のクイズ（全195か国・正式なSVG表示） | 195問 |
-| 🐶 どうぶつ | 動物の名前・鳴き声・特徴 | 12問 |
-| 🍎 たべもの | 食べ物の名前 | 12問 |
-| 🌈 いろ | 色の基本 | 12問 |
-| 🔢 かず | 数を数える・数字 | 12問 |
-| あ ひらがな | ひらがなと、ことばの最初の文字 | 12問 |
+| カテゴリ    | 内容                                             | 問題数 |
+| ----------- | ------------------------------------------------ | ------ |
+| 🚩 こっき   | 世界の国の旗のクイズ（全195か国・正式なSVG表示） | 195問  |
+| 🐶 どうぶつ | 動物の名前・鳴き声・特徴                         | 12問   |
+| 🍎 たべもの | 食べ物の名前                                     | 12問   |
+| 🌈 いろ     | 色の基本                                         | 12問   |
+| 🔢 かず     | 数を数える・数字                                 | 12問   |
+| あ ひらがな | ひらがなと、ことばの最初の文字                   | 12問   |
 
 国旗は全195か国（国連加盟193＋バチカン・パレスチナ）のデータを同梱し、
 ホームの「こっき ずかん」から地域フィルターと名前検索で眺められます。
-難易度は、こっきでは「やさしい＝有名な24か国だけ／むずかしい＝同じ地域の国が選択肢に混ざる」で、
-他のカテゴリでは選択肢の数（2・3・4）で調整します。
+
+難易度は、こっきでは次のとおりです。ほかのカテゴリでは選択肢の数（2・3・4）で調整します。
+
+| 難易度     | 出る国       | 選択肢                      |
+| ---------- | ------------ | --------------------------- |
+| やさしい   | 有名な24か国 | 2択（有名な国どうし）       |
+| ふつう     | 全195か国    | 3択（毎回ちがう組み合わせ） |
+| むずかしい | 全195か国    | 4択（同じ地域の国が混ざる） |
+
+## 対応する画面
+
+PC・スマホ縦・スマホ横のすべてで、横スクロールなしで遊べます。
+
+- 文字サイズと余白は画面に合わせて伸び縮みします（`src/styles/tokens.css`）。
+- 横長の画面（横向きスマホ・タブレット・PC）では、クイズは「左に問題、右に選択肢」の2カラムになります。
+- 答え合わせの帯は、画面からはみ出すときは下端に貼り付くので、スクロールせずに次へ進めます。
+- ノッチやホームバーのある端末でも、端が隠れないようにしています（safe-area 対応）。
+- ホーム画面に追加すると、アプリのように全画面で開けます（`public/manifest.webmanifest`）。
 
 ## CI / デプロイ
 
-- **CI**（`.github/workflows/ci.yml`）：push と pull request で lint・テスト・ビルドを自動実行します。
+- **CI**（`.github/workflows/ci.yml`）：pull request と main への push で、
+  format チェック・lint・テスト・ビルド（型チェック込み）を自動実行します。
   結果は各実行の Step Summary にサマリ（成否とテスト件数）が表示されます。
   main への直接 push は禁止で、必ずブランチ → プルリクエスト経由にします（CI が合格しないとマージ不可）。
 - **デプロイ**（`.github/workflows/deploy.yml`）：main への push（と手動実行）で GitHub Pages へ自動デプロイします。
@@ -38,32 +55,53 @@
 
 ## 開発手順
 
+Node.js 22 以上を使います（`.nvmrc`）。
+
 ```bash
-npm install     # 依存関係のインストール
-npm run dev     # 開発サーバ起動
-npm run test    # テスト（Vitest）
-npm run build   # 本番ビルド（型チェック + Viteビルド）
-npm run preview # ビルド結果のプレビュー
+npm install          # 依存関係のインストール
+npm run dev          # 開発サーバ起動
+npm run check        # format・lint・型チェック・テスト・ビルドを一括実行（PR前に必ず）
+npm run format       # Prettier で整形
+npm run test:watch   # テストを監視モードで実行
+npm run preview      # ビルド結果のプレビュー
 ```
+
+## AI に作業を頼むとき
+
+- [AGENTS.md](AGENTS.md)：AI エージェント向けのルール（構成・書き方・やってはいけないこと）。
+  Claude Code は `CLAUDE.md` 経由で自動的に読みます。
+- [docs/prompts/muse.md](docs/prompts/muse.md)：Muse などに貼って使うプロンプトのひな形。
 
 ## カテゴリの追加方法
 
 クイズはデータ駆動の構造になっているので、**データを追加するだけ**でカテゴリを増やせます。画面やエンジンのコードを変える必要はありません。
 
-1. `src/data/` にファイルを作り、`CategoryQuiz` 型のデータを定義する
+1. `src/data/categories/` にファイルを作り、`CategoryQuiz` 型のデータを定義する
    - カテゴリ：`{ id, name, icon（絵文字）, color（カードの背景色）, description }`
-   - 問題：`{ question, visual（絵文字・任意）, choices（必ず4つ）, answerIndex（0〜3）, explanation（任意）, id・tags（任意） }`
-   - 難易度（任意）：`difficulties: [{ id, label, choiceCount（表示する選択肢数）, poolTag（プールを絞るタグ） }]`。付けなければ難易度なしでそのまま動く
+   - 問題：`{ question, visual（絵文字・任意）, choices（必ず4つ）, answerIndex（0〜3）, explanation（任意）, id・tags・group（任意） }`
+   - 難易度（任意）：`difficulties: [{ id, label, choiceCount（表示する選択肢数）, poolTag（プールを絞るタグ）, distractors（誤答の選び方） }]`。付けなければ難易度なしでそのまま動く
    - 型定義は `src/types.ts` を参照
 2. `src/data/index.ts` の `allQuizzes` に追加する
 
-詳しくは既存の `src/data/flags.ts`（こっき）などを真似てください。追加したデータは `src/data/data.test.ts` の整合性テスト（問題数・選択肢数・正解インデックスの範囲）で自動チェックされます。
+手本は `src/data/categories/animals.ts`（ふつうのカテゴリ）と `flags.ts`（データから問題を生成する例）です。
+追加したデータは `src/data/data.test.ts` の整合性テスト（問題数・選択肢数・正解インデックスの範囲）で自動チェックされます。
 
 ## 構成
 
-- `src/types.ts` — カテゴリ・問題・難易度宣言の型定義
-- `src/data/` — カテゴリごとのクイズデータ（`countries.ts` に全195か国の国データ、`src/assets/flags/` に国旗SVG）
-- `src/quiz/foundation/` — クイズ基盤：セッション管理・ブロック出題・難易度（任意）の純粋関数群（テスト付き）。仕様は [docs/quiz-foundation.md](docs/quiz-foundation.md)
-- `src/quiz/adapter.ts` — アプリのデータを基盤の型へ変換するアダプタ
-- `src/quiz/engine.ts` — ほめ言葉などの補助関数（従来エンジン）
-- `src/components/` — ホーム画面 / 難易度えらび画面 / クイズ画面 / 結果画面
+```
+public/flags/         国旗SVG（195か国。flag-icons 由来）
+src/
+  main.tsx            起動
+  App.tsx             画面の切り替えとセッションの受け渡し
+  types.ts            カテゴリ・問題・難易度宣言の型
+  styles/             デザイントークン（tokens.css）と共通スタイル（base.css）
+  components/         複数画面で使う部品
+  screens/            画面ごとの .tsx + .css（ホーム / 難易度えらび / クイズ / 結果 / こっき ずかん）
+  data/               カテゴリ一覧・カテゴリごとのクイズデータ・国データ
+  quiz/foundation/    クイズ基盤（セッション・ブロック出題・難易度の純粋関数群。テスト付き）
+  quiz/adapter.ts     アプリのデータを基盤の型へ変換するアダプタ
+  quiz/praise.ts      ほめ言葉
+docs/
+  quiz-foundation.md  クイズ基盤の仕様
+  prompts/muse.md     AI に貼るプロンプトのひな形
+```

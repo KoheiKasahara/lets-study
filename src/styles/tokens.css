@@ -1,0 +1,63 @@
+/*
+ * デザイントークン（色・文字サイズ・余白）。
+ * 画面のCSSでは生の値を書かず、ここの変数を使う。
+ * 文字サイズは clamp() で画面幅に合わせて伸び縮みする（スマホ〜PC共通）。
+ */
+:root {
+  /* 色 */
+  --color-bg: #fffaf0;
+  --color-surface: #fff;
+  --color-text: #333;
+  --color-text-sub: #555;
+  --color-border: #d0d7e5;
+  --color-border-soft: rgb(0 0 0 / 0.08);
+  --color-primary: #ffb703;
+  --color-secondary: #e8ecf3;
+  --color-focus: #4dabff;
+  --color-correct: #4caf50;
+  --color-correct-bg: #d9f7d9;
+  --color-correct-soft: #eefbee;
+  --color-wrong: #e57373;
+  --color-wrong-bg: #ffe1e1;
+  --color-wrong-soft: #fff4f4;
+
+  /* 文字サイズ */
+  --font-xs: 0.85rem;
+  --font-s: clamp(0.95rem, 0.6rem + 1.2vw, 1.15rem);
+  --font-m: clamp(1.05rem, 0.7rem + 1.6vw, 1.4rem);
+  --font-l: clamp(1.3rem, 0.8rem + 2.4vw, 2rem);
+  --font-xl: clamp(1.8rem, 1rem + 4vw, 3rem);
+  --font-emoji: clamp(3.5rem, 22dvh, 7rem);
+
+  /* 余白・角丸 */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: clamp(16px, 3vmin, 24px);
+  --radius-s: 12px;
+  --radius-m: 20px;
+  --radius-pill: 999px;
+
+  /* タップしやすい最小の高さ */
+  --tap-min: 48px;
+  --tap-large: clamp(56px, 12dvh, 88px);
+
+  /* レイアウト幅（縦長は読みやすい幅、横長・PCは広く使う） */
+  --app-max-width: 720px;
+}
+
+@media (orientation: landscape) and (min-width: 560px) {
+  :root {
+    --app-max-width: 1080px;
+  }
+}
+
+/* 横向きスマホなど高さが足りない画面：余白と大きな文字を詰める */
+@media (max-height: 480px) {
+  :root {
+    --font-l: clamp(1.1rem, 0.7rem + 1.6vw, 1.5rem);
+    --font-xl: clamp(1.4rem, 0.9rem + 2.4vw, 2rem);
+    --space-5: 12px;
+  }
+}

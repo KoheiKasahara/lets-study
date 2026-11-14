@@ -1,39 +1,36 @@
 import { describe, expect, it } from 'vitest';
 import { allQuizzes, getQuizById } from './index';
 import { REGIONS, countries, famousCountries } from './countries';
-import { flagUrlByCode } from './flagAssets';
+import { CHOICES_PER_QUESTION } from '../types';
+import { toQuizDefinition } from '../quiz/adapter';
+import { createSession, nextBlock } from '../quiz/foundation';
+
+/** public/flags/ にあるSVGの国コード一覧（ファイルは読み込まず、パスだけ集める） */
+const flagFileCodes = Object.keys(import.meta.glob('/public/flags/*.svg')).map((path) =>
+  path.replace(/^.*\/([a-z]{2})\.svg$/, '$1'),
+);
 
 describe('クイズデータの整合性', () => {
-  it('カテゴリはスペース版と同じ6種', () => {
-    expect(allQuizzes.map((q) => q.category.id)).toEqual([
-      'flags',
-      'animals',
-      'foods',
-      'colors',
-      'numbers',
-      'hiragana',
-    ]);
-  });
-
   it('カテゴリIDが重複していない', () => {
     const ids = allQuizzes.map((q) => q.category.id);
     expect(new Set(ids).size).toBe(ids.length);
   });
 
-  it('国旗以外の各カテゴリは12問ある', () => {
+  it('各カテゴリは1セット（10問）以上ある', () => {
     for (const quiz of allQuizzes) {
-      if (quiz.category.id === 'flags') continue;
-      expect(quiz.questions.length, quiz.category.id).toBe(12);
+      expect(quiz.questions.length, quiz.category.id).toBeGreaterThanOrEqual(10);
     }
   });
 
   it('各問題は選択肢が4つで重複なし、正解インデックスが範囲内', () => {
     for (const quiz of allQuizzes) {
       for (const q of quiz.questions) {
-        expect(q.choices, `${quiz.category.id}: ${q.question}`).toHaveLength(4);
+        expect(q.choices, `${quiz.category.id}: ${q.question}`).toHaveLength(CHOICES_PER_QUESTION);
         expect(q.answerIndex).toBeGreaterThanOrEqual(0);
-        expect(q.answerIndex).toBeLessThan(4);
-        expect(new Set(q.choices).size, `${quiz.category.id}: ${q.question}`).toBe(4);
+        expect(q.answerIndex).toBeLessThan(CHOICES_PER_QUESTION);
+        expect(new Set(q.choices).size, `${quiz.category.id}: ${q.question}`).toBe(
+          CHOICES_PER_QUESTION,
+        );
       }
     }
   });
@@ -59,11 +56,16 @@ describe('クイズデータの整合性', () => {
       for (const d of quiz.difficulties) {
         if (d.choiceCount != null) {
           expect(d.choiceCount, `${quiz.category.id}/${d.id}`).toBeGreaterThanOrEqual(2);
-          expect(d.choiceCount, `${quiz.category.id}/${d.id}`).toBeLessThanOrEqual(4);
+          expect(d.choiceCount, `${quiz.category.id}/${d.id}`).toBeLessThanOrEqual(
+            CHOICES_PER_QUESTION,
+          );
         }
         if (d.poolTag != null) {
           const matched = quiz.questions.filter((q) => q.tags?.includes(d.poolTag!));
-          expect(matched.length, `${quiz.category.id}/${d.id} poolTag=${d.poolTag}`).toBeGreaterThanOrEqual(1);
+          expect(
+            matched.length,
+            `${quiz.category.id}/${d.id} poolTag=${d.poolTag}`,
+          ).toBeGreaterThanOrEqual(1);
         }
       }
     }
@@ -101,13 +103,8 @@ describe('国データと国旗SVG', () => {
     expect(famousCountries).toHaveLength(24);
   });
 
-  it('全ての国コードに対応する国旗SVGファイルがある', () => {
-    // flagAssets は src/assets/flags/*.svg を glob で読み込むため、
-    // ここにコードが存在する＝SVGファイルが同梱されていることになる
-    expect(Object.keys(flagUrlByCode)).toHaveLength(195);
-    for (const country of countries) {
-      expect(flagUrlByCode[country.code], `missing flag svg: ${country.code}`).toBeTruthy();
-    }
+  it('全ての国コードに対応する国旗SVGファイルがあり、余分なファイルもない', () => {
+    expect([...flagFileCodes].sort()).toEqual(getCountryCodes().sort());
   });
 
   it('国旗クイズの問題は全195か国ぶん生成されている', () => {
@@ -116,6 +113,46 @@ describe('国データと国旗SVG', () => {
     for (const q of flags.questions) {
       expect(q.flagCode, q.id).toBeTruthy();
       expect(q.group, q.id).toBeTruthy();
+    }
+  });
+});
+
+describe('国旗クイズの難易度', () => {
+  const definition = toQuizDefinition(getQuizById('flags')!);
+  const yomiToRegion = new Map(countries.map((c) => [c.yomi, c.region]));
+  const famousYomi = new Set(famousCountries.map((c) => c.yomi));
+
+  /** その難易度で全問を出題し終えるまでのブロックを集める */
+  function allPrepared(difficultyId: string) {
+    let session = createSession(definition, { difficultyId });
+    const prepared = [];
+    for (let next = nextBlock(session); next; next = nextBlock(session)) {
+      prepared.push(...next.block);
+      session = next.session;
+    }
+    return prepared;
+  }
+
+  it('やさしい：有名な国だけが出て、選択肢も有名な国の2択', () => {
+    const prepared = allPrepared('easy');
+    expect(prepared).toHaveLength(famousCountries.length);
+    for (const q of prepared) {
+      expect(q.choices).toHaveLength(2);
+      for (const choice of q.choices) expect(famousYomi.has(choice), choice).toBe(true);
+    }
+  });
+
+  it('ふつう：全ての国が出て3択', () => {
+    const prepared = allPrepared('normal');
+    expect(prepared).toHaveLength(countries.length);
+    for (const q of prepared) expect(new Set(q.choices).size).toBe(3);
+  });
+
+  it('むずかしい：4択すべてが正解と同じ地域の国', () => {
+    for (const q of allPrepared('hard')) {
+      expect(new Set(q.choices).size).toBe(4);
+      const region = yomiToRegion.get(q.choices[q.answerIndex]);
+      for (const choice of q.choices) expect(yomiToRegion.get(choice), choice).toBe(region);
     }
   });
 });

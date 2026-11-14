@@ -1,0 +1,23 @@
+/* 縦長は縦に積み、横長は横に並べる */
+.difficulty__list {
+  display: grid;
+  grid-auto-flow: row;
+  gap: var(--space-4);
+}
+
+@media (orientation: landscape) and (min-width: 560px) {
+  .difficulty__list {
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+  }
+}
+
+.difficulty__name {
+  font-size: var(--font-l);
+  font-weight: 700;
+}
+
+.difficulty__desc {
+  font-size: var(--font-s);
+  color: var(--color-text-sub);
+}

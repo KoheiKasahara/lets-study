@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { CategoryQuiz, QuizDifficulty } from './types';
 import { allQuizzes } from './data';
 import { toQuizDefinition } from './quiz/adapter';
@@ -6,19 +6,17 @@ import {
   canContinue,
   createSession,
   hasDifficulties,
-  isExhausted,
   nextBlock,
   recordBlockResult,
   type BlockResult,
   type PreparedQuestion,
   type QuizSession,
 } from './quiz/foundation';
-import { HomeScreen } from './components/HomeScreen';
-import { FlagsGuideScreen } from './components/FlagsGuideScreen';
-import { DifficultyScreen } from './components/DifficultyScreen';
-import { QuizScreen } from './components/QuizScreen';
-import { ResultScreen } from './components/ResultScreen';
-import './App.css';
+import { HomeScreen } from './screens/HomeScreen';
+import { FlagsGuideScreen } from './screens/FlagsGuideScreen';
+import { DifficultyScreen } from './screens/DifficultyScreen';
+import { QuizScreen } from './screens/QuizScreen';
+import { ResultScreen } from './screens/ResultScreen';
 
 type Screen =
   | { name: 'home' }
@@ -40,6 +38,11 @@ type Screen =
 
 export default function App() {
   const [screen, setScreen] = useState<Screen>({ name: 'home' });
+
+  // 画面が切り替わったら先頭から見せる（長い一覧をスクロールしたまま次の画面に行かない）
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [screen]);
 
   /** セッションを作って最初のセットを開始する */
   const startSession = (quiz: CategoryQuiz, difficultyId?: string) => {
@@ -130,7 +133,6 @@ export default function App() {
           totalCorrect={screen.session.totalCorrect}
           totalAnswered={screen.session.totalAnswered}
           canContinue={canContinue(screen.session)}
-          exhausted={isExhausted(screen.session)}
           onContinue={() => continueSession(screen.quiz, screen.session)}
           onRestart={() => restartSession(screen.quiz, screen.session)}
           onHome={() => setScreen({ name: 'home' })}

@@ -192,7 +192,7 @@ describe('難易度（任意）', () => {
     const { block } = nextBlock(easySession, seededRandom(18))!;
     expect(block).toHaveLength(4);
     for (const q of block) {
-      expect((q.source.meta?.tags as string[])).toContain('famous');
+      expect(q.source.meta?.tags as string[]).toContain('famous');
     }
 
     const allSession = createSession(def, { difficultyId: 'all', random: seededRandom(17) });
@@ -223,5 +223,44 @@ describe('難易度（任意）', () => {
       expect(q.choices).toContain(`${q.source.text}の誤答`);
       expect(q.choices[q.answerIndex]).toBe(q.source.choices[0]);
     }
+  });
+
+  it('pickDistractors は choiceCount が問題本来の数と同じでも使われる', () => {
+    const def: QuizDefinition = {
+      id: 'full-count',
+      title: '選択肢数そのまま',
+      questions: [{ id: 'y1', text: 't', choices: ['せいかい', 'w1', 'w2', 'w3'], answerIndex: 0 }],
+      difficulties: [
+        { id: 'hard', label: 'むずかしい', choiceCount: 4, pickDistractors: () => ['p1', 'p2'] },
+      ],
+    };
+    const session = createSession(def, { difficultyId: 'hard', random: seededRandom(21) });
+    const { block } = nextBlock(session, seededRandom(22))!;
+    expect(block[0].choices).toHaveLength(4);
+    expect(block[0].choices).toEqual(expect.arrayContaining(['せいかい', 'p1', 'p2']));
+  });
+
+  it('誤答の抽選元プールは、出題が進んでも減らない', () => {
+    const seenPoolSizes: number[] = [];
+    const def: QuizDefinition = {
+      id: 'stable-pool',
+      title: 'プール固定',
+      questions: makeQuestions(12),
+      blockSize: 5,
+      difficulties: [
+        {
+          id: 'only',
+          label: 'only',
+          pickDistractors: ({ pool }) => {
+            seenPoolSizes.push(pool.length);
+            return [];
+          },
+        },
+      ],
+    };
+    let session = createSession(def, { random: seededRandom(23) });
+    for (let next = nextBlock(session); next; next = nextBlock(session)) session = next.session;
+    expect(seenPoolSizes).toHaveLength(12);
+    expect(new Set(seenPoolSizes)).toEqual(new Set([12]));
   });
 });
