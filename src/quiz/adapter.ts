@@ -17,6 +17,8 @@ export interface AppQuestionMeta {
   tags: readonly string[];
   group?: string;
   flagCode?: string;
+  /** 問題に表示する画像（public/images/ からの相対パス） */
+  image?: string;
 }
 
 /** 出題用の問題からアプリ固有の付加情報を取り出す（meta を書くのはこのアダプタだけ） */
@@ -61,6 +63,7 @@ export function toQuizDefinition(quiz: CategoryQuiz): QuizDefinition {
         tags: q.tags ?? [],
         group: q.group,
         flagCode: q.flagCode,
+        image: q.image,
       };
       return {
         id: q.id ?? `${quiz.category.id}-${i + 1}`,

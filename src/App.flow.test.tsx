@@ -2,6 +2,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { beforeAll, describe, expect, it } from 'vitest';
 import App from './App';
+import { animalsQuiz } from './data/categories/animals';
 
 // jsdom は scrollTo を実装していないので空の関数に差し替える
 beforeAll(() => {
@@ -43,12 +44,21 @@ describe('画面の基本フロー', () => {
     expect(screen.getByText(/このセットは 10もんちゅう/)).toBeTruthy();
     fireEvent.click(screen.getByRole('button', { name: /つづけて あそぶ/ }));
 
-    // 2セット目（残り2問）を解くと使い切り
-    expect(screen.getByText(/セット2/)).toBeTruthy();
-    for (let i = 0; i < 2; i++) answerOneQuestion();
+    // 残りのセットを解き切る（問題総数はデータから取得し、増減に追随する）
+    const totalQuestions = animalsQuiz.questions.length;
+    let answered = 10;
+    for (let blockNumber = 2; answered < totalQuestions; blockNumber++) {
+      expect(screen.getByText(new RegExp(`セット${blockNumber}`))).toBeTruthy();
+      const inBlock = Math.min(10, totalQuestions - answered);
+      for (let i = 0; i < inBlock; i++) answerOneQuestion();
+      answered += inBlock;
+      if (answered < totalQuestions) {
+        fireEvent.click(screen.getByRole('button', { name: /つづけて あそぶ/ }));
+      }
+    }
 
     expect(screen.getByText('ぜんぶ おわった！')).toBeTruthy();
-    expect(screen.getByText(/ぜんぶで 12もんちゅう/)).toBeTruthy();
+    expect(screen.getByText(new RegExp(`ぜんぶで ${totalQuestions}もんちゅう`))).toBeTruthy();
     expect(screen.getByRole('button', { name: /さいしょから あそぶ/ })).toBeTruthy();
   });
 

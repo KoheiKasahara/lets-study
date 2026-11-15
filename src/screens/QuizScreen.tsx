@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ScreenHeader } from '../components/ScreenHeader';
 import { getFlagUrl } from '../data/flagAssets';
+import { getImageUrl } from '../data/imageAssets';
 import { metaOf } from '../quiz/adapter';
 import { isCorrect, type PreparedQuestion } from '../quiz/foundation';
 import type { CategoryQuiz } from '../types';
@@ -36,7 +37,7 @@ export function QuizScreen({
   const current = block[index];
   const answered = selected !== null;
   const correct = answered && isCorrect(current, selected);
-  const { explanation, flagCode } = metaOf(current);
+  const { explanation, flagCode, image } = metaOf(current);
   const isLast = index + 1 >= block.length;
 
   const handleSelect = (choiceIndex: number) => {
@@ -72,6 +73,8 @@ export function QuizScreen({
           <h2 className="screen-title">{current.text}</h2>
           {flagCode ? (
             <img src={getFlagUrl(flagCode)} alt="こっき" className="quiz__flag" />
+          ) : image ? (
+            <img src={getImageUrl(image)} alt="クイズの がぞう" className="quiz__image" />
           ) : (
             current.visual && (
               <div className="quiz__visual" aria-hidden="true">

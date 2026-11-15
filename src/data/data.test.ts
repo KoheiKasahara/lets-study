@@ -10,6 +10,12 @@ const flagFileCodes = Object.keys(import.meta.glob('/public/flags/*.svg')).map((
   path.replace(/^.*\/([a-z]{2})\.svg$/, '$1'),
 );
 
+/** public/images/ にある画像ファイルのパス一覧（ファイルは読み込まず、パスだけ集める） */
+const imageFilePaths = new Set([
+  ...Object.keys(import.meta.glob('/public/images/**/*.jpg')),
+  ...Object.keys(import.meta.glob('/public/images/**/*.svg')),
+]);
+
 describe('クイズデータの整合性', () => {
   it('カテゴリIDが重複していない', () => {
     const ids = allQuizzes.map((q) => q.category.id);
@@ -41,8 +47,8 @@ describe('クイズデータの整合性', () => {
         const codes = quiz.questions.map((q) => q.flagCode);
         expect(new Set(codes).size).toBe(codes.length);
       } else {
-        // 同じ問題文でも visual が違えば別問題として扱う
-        const keys = quiz.questions.map((q) => `${q.question}|${q.visual ?? ''}`);
+        // 同じ問題文でも visual や image が違えば別問題として扱う
+        const keys = quiz.questions.map((q) => `${q.question}|${q.visual ?? ''}|${q.image ?? ''}`);
         expect(new Set(keys).size).toBe(keys.length);
       }
     }
@@ -67,6 +73,18 @@ describe('クイズデータの整合性', () => {
             `${quiz.category.id}/${d.id} poolTag=${d.poolTag}`,
           ).toBeGreaterThanOrEqual(1);
         }
+      }
+    }
+  });
+
+  it('image を指定した問題は public/images/ に対応ファイルが実在する', () => {
+    for (const quiz of allQuizzes) {
+      for (const q of quiz.questions) {
+        if (q.image == null) continue;
+        expect(
+          imageFilePaths.has(`/public/images/${q.image}`),
+          `${quiz.category.id}: ${q.image}`,
+        ).toBe(true);
       }
     }
   });

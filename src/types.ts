@@ -27,6 +27,12 @@ export interface Question {
   question: string;
   /** 問題文の下に大きく表示する絵文字（旗・動物など） */
   visual?: string;
+  /**
+   * 問題文の下に大きく表示する画像（任意）。
+   * public/images/ からの相対パス（例: 'animals/dog.jpg'）。
+   * 絵文字より実際の写真・イラストで見せたいときに使う（flagCode の次に優先される）。
+   */
+  image?: string;
   /** 選択肢は必ず4つ */
   choices: [string, string, string, string];
   /** 正解の選択肢のインデックス（0〜3） */
