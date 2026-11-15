@@ -39,9 +39,23 @@
   background: var(--color-surface);
 }
 
+/* 写真・イラスト画像（public/images/）。国旗と同程度の大きさで、はみ出しは切り取る */
+.quiz__image {
+  width: min(100%, 420px);
+  height: clamp(150px, 36dvh, 320px);
+  object-fit: cover;
+  border: 3px solid var(--color-border-soft);
+  border-radius: var(--radius-m);
+  background: var(--color-surface);
+}
+
 /* 答え合わせ中は絵・国旗を小さくして、答え合わせの帯が選択肢に重ならないようにする */
 .quiz.is-answered .quiz__flag {
   height: clamp(80px, 16dvh, 200px);
+}
+
+.quiz.is-answered .quiz__image {
+  height: clamp(90px, 18dvh, 200px);
 }
 
 .quiz.is-answered .quiz__visual {
@@ -140,6 +154,14 @@
 
   .quiz.is-answered .quiz__flag {
     height: clamp(70px, 24dvh, 260px);
+  }
+
+  .quiz__image {
+    height: clamp(150px, 52dvh, 380px);
+  }
+
+  .quiz.is-answered .quiz__image {
+    height: clamp(80px, 26dvh, 240px);
   }
 
   .quiz__feedback {

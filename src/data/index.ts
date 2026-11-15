@@ -5,6 +5,8 @@ import { flagsQuiz } from './categories/flags';
 import { foodsQuiz } from './categories/foods';
 import { hiraganaQuiz } from './categories/hiragana';
 import { numbersQuiz } from './categories/numbers';
+import { shapesQuiz } from './categories/shapes';
+import { vehiclesQuiz } from './categories/vehicles';
 
 /**
  * 全カテゴリの一覧（ホーム画面にこの順で並ぶ）。
@@ -14,7 +16,9 @@ export const allQuizzes: CategoryQuiz[] = [
   flagsQuiz,
   animalsQuiz,
   foodsQuiz,
+  vehiclesQuiz,
   colorsQuiz,
+  shapesQuiz,
   numbersQuiz,
   hiraganaQuiz,
 ];
