@@ -2,8 +2,8 @@ import type { CategoryQuiz } from '../../types';
 import { defaultDifficulties } from './difficulties';
 
 /**
- * ひらがなクイズ：ひらがなを提示して、その文字から始まることばを選ぶ問題（63問）。
- * 清音46文字すべて＋どうぶつ・たべもの限定の応用問題。
+ * ひらがなクイズ：ひらがなを提示して、その文字から始まることばを選ぶ問題（86問）。
+ * 清音46文字すべて＋どうぶつ・たべもの限定の応用問題＋濁点・半濁点の文字（ぢ・づを除く23文字）。
  */
 export const hiraganaQuiz: CategoryQuiz = {
   category: {
@@ -467,6 +467,167 @@ export const hiraganaQuiz: CategoryQuiz = {
       choices: ['みかん', 'もも', 'めろん', 'むぎちゃ'],
       answerIndex: 2,
       explanation: 'めろんは「め」から はじまるよ。',
+    },
+    {
+      question: 'この もじから はじまる ことばは どれ？',
+      visual: 'が',
+      choices: ['がっこう', 'ざっし', 'でんしゃ', 'ぼうし'],
+      answerIndex: 0,
+      explanation: 'がっこうは「が」から はじまるよ。てんてん（だくてん）の もじだよ。',
+    },
+    {
+      question: 'この もじから はじまる ことばは どれ？',
+      visual: 'ぎ',
+      choices: ['じかん', 'ぎゅうにゅう', 'どんぐり', 'ぱん'],
+      answerIndex: 1,
+      explanation: 'ぎゅうにゅうは「ぎ」から はじまるよ。てんてん（だくてん）の もじだよ。',
+    },
+    {
+      question: 'この もじから はじまる ことばは どれ？',
+      visual: 'ぐ',
+      choices: ['ずぼん', 'ばなな', 'ぐるぐる', 'ぴあの'],
+      answerIndex: 2,
+      explanation: 'ぐるぐるは「ぐ」から はじまるよ。てんてん（だくてん）の もじだよ。',
+    },
+    {
+      question: 'この もじから はじまる ことばは どれ？',
+      visual: 'げ',
+      choices: ['ぜんぶ', 'びょういん', 'ぷーる', 'げんき'],
+      answerIndex: 3,
+      explanation: 'げんきは「げ」から はじまるよ。てんてん（だくてん）の もじだよ。',
+    },
+    {
+      question: 'この もじから はじまる ことばは どれ？',
+      visual: 'ご',
+      choices: ['ごはん', 'ぞう', 'ぶどう', 'ぺんぎん'],
+      answerIndex: 0,
+      explanation: 'ごはんは「ご」から はじまるよ。てんてん（だくてん）の もじだよ。',
+    },
+    {
+      question: 'この もじから はじまる ことばは どれ？',
+      visual: 'ざ',
+      choices: ['だいこん', 'ざっし', 'べんきょう', 'ぽけっと'],
+      answerIndex: 1,
+      explanation: 'ざっしは「ざ」から はじまるよ。てんてん（だくてん）の もじだよ。',
+    },
+    {
+      question: 'この もじから はじまる ことばは どれ？',
+      visual: 'じ',
+      choices: ['でんしゃ', 'ぼうし', 'じかん', 'がっこう'],
+      answerIndex: 2,
+      explanation: 'じかんは「じ」から はじまるよ。てんてん（だくてん）の もじだよ。',
+    },
+    {
+      question: 'この もじから はじまる ことばは どれ？',
+      visual: 'ず',
+      choices: ['どんぐり', 'ぱん', 'ぎゅうにゅう', 'ずぼん'],
+      answerIndex: 3,
+      explanation: 'ずぼんは「ず」から はじまるよ。てんてん（だくてん）の もじだよ。',
+    },
+    {
+      question: 'この もじから はじまる ことばは どれ？',
+      visual: 'ぜ',
+      choices: ['ぜんぶ', 'ばなな', 'ぴあの', 'ぐるぐる'],
+      answerIndex: 0,
+      explanation: 'ぜんぶは「ぜ」から はじまるよ。てんてん（だくてん）の もじだよ。',
+    },
+    {
+      question: 'この もじから はじまる ことばは どれ？',
+      visual: 'ぞ',
+      choices: ['びょういん', 'ぞう', 'ぷーる', 'げんき'],
+      answerIndex: 1,
+      explanation: 'ぞうは「ぞ」から はじまるよ。てんてん（だくてん）の もじだよ。',
+    },
+    {
+      question: 'この もじから はじまる ことばは どれ？',
+      visual: 'だ',
+      choices: ['ぶどう', 'ぺんぎん', 'だいこん', 'ごはん'],
+      answerIndex: 2,
+      explanation: 'だいこんは「だ」から はじまるよ。てんてん（だくてん）の もじだよ。',
+    },
+    {
+      question: 'この もじから はじまる ことばは どれ？',
+      visual: 'で',
+      choices: ['べんきょう', 'ぽけっと', 'ざっし', 'でんしゃ'],
+      answerIndex: 3,
+      explanation: 'でんしゃは「で」から はじまるよ。てんてん（だくてん）の もじだよ。',
+    },
+    {
+      question: 'この もじから はじまる ことばは どれ？',
+      visual: 'ど',
+      choices: ['どんぐり', 'ぼうし', 'がっこう', 'じかん'],
+      answerIndex: 0,
+      explanation: 'どんぐりは「ど」から はじまるよ。てんてん（だくてん）の もじだよ。',
+    },
+    {
+      question: 'この もじから はじまる ことばは どれ？',
+      visual: 'ば',
+      choices: ['ぱん', 'ばなな', 'ぎゅうにゅう', 'ずぼん'],
+      answerIndex: 1,
+      explanation: 'ばななは「ば」から はじまるよ。てんてん（だくてん）の もじだよ。',
+    },
+    {
+      question: 'この もじから はじまる ことばは どれ？',
+      visual: 'び',
+      choices: ['ぴあの', 'ぐるぐる', 'びょういん', 'ぜんぶ'],
+      answerIndex: 2,
+      explanation: 'びょういんは「び」から はじまるよ。てんてん（だくてん）の もじだよ。',
+    },
+    {
+      question: 'この もじから はじまる ことばは どれ？',
+      visual: 'ぶ',
+      choices: ['ぷーる', 'げんき', 'ぞう', 'ぶどう'],
+      answerIndex: 3,
+      explanation: 'ぶどうは「ぶ」から はじまるよ。てんてん（だくてん）の もじだよ。',
+    },
+    {
+      question: 'この もじから はじまる ことばは どれ？',
+      visual: 'べ',
+      choices: ['べんきょう', 'ぺんぎん', 'ごはん', 'だいこん'],
+      answerIndex: 0,
+      explanation: 'べんきょうは「べ」から はじまるよ。てんてん（だくてん）の もじだよ。',
+    },
+    {
+      question: 'この もじから はじまる ことばは どれ？',
+      visual: 'ぼ',
+      choices: ['ぽけっと', 'ぼうし', 'ざっし', 'でんしゃ'],
+      answerIndex: 1,
+      explanation: 'ぼうしは「ぼ」から はじまるよ。てんてん（だくてん）の もじだよ。',
+    },
+    {
+      question: 'この もじから はじまる ことばは どれ？',
+      visual: 'ぱ',
+      choices: ['がっこう', 'じかん', 'ぱん', 'どんぐり'],
+      answerIndex: 2,
+      explanation: 'ぱんは「ぱ」から はじまるよ。てんてん（だくてん）の もじだよ。',
+    },
+    {
+      question: 'この もじから はじまる ことばは どれ？',
+      visual: 'ぴ',
+      choices: ['ぎゅうにゅう', 'ずぼん', 'ばなな', 'ぴあの'],
+      answerIndex: 3,
+      explanation: 'ぴあのは「ぴ」から はじまるよ。てんてん（だくてん）の もじだよ。',
+    },
+    {
+      question: 'この もじから はじまる ことばは どれ？',
+      visual: 'ぷ',
+      choices: ['ぷーる', 'ぐるぐる', 'ぜんぶ', 'びょういん'],
+      answerIndex: 0,
+      explanation: 'ぷーるは「ぷ」から はじまるよ。てんてん（だくてん）の もじだよ。',
+    },
+    {
+      question: 'この もじから はじまる ことばは どれ？',
+      visual: 'ぺ',
+      choices: ['げんき', 'ぺんぎん', 'ぞう', 'ぶどう'],
+      answerIndex: 1,
+      explanation: 'ぺんぎんは「ぺ」から はじまるよ。てんてん（だくてん）の もじだよ。',
+    },
+    {
+      question: 'この もじから はじまる ことばは どれ？',
+      visual: 'ぽ',
+      choices: ['ごはん', 'だいこん', 'ぽけっと', 'べんきょう'],
+      answerIndex: 2,
+      explanation: 'ぽけっとは「ぽ」から はじまるよ。てんてん（だくてん）の もじだよ。',
     },
   ],
 };

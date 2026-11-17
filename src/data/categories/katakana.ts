@@ -2,7 +2,7 @@ import type { CategoryQuiz } from '../../types';
 import { defaultDifficulties } from './difficulties';
 
 /**
- * カタカナクイズ：カタカナを提示して、同じ読みのひらがなを選ぶ問題（46問）。
+ * カタカナクイズ：カタカナを提示して、同じ読みのひらがなを選ぶ問題（46問）と、カタカナの言葉の読みを選ぶ問題（20問）。
  * 清音46文字すべてをカバーする。
  */
 export const katakanaQuiz: CategoryQuiz = {
@@ -336,6 +336,146 @@ export const katakanaQuiz: CategoryQuiz = {
       choices: ['き', 'ん', 'て', 'ま'],
       answerIndex: 1,
       explanation: '「ン」は「ん」と おなじ よみだよ。',
+    },
+    {
+      question: 'この カタカナの ことばの よみは どれ？',
+      visual: 'パン',
+      choices: ['ばなな', 'ばす', 'ぱん', 'ぱんだ'],
+      answerIndex: 2,
+      explanation: '「パン」は「ぱん」と よむよ。',
+    },
+    {
+      question: 'この カタカナの ことばの よみは どれ？',
+      visual: 'アイス',
+      choices: ['ぴあの', 'たくしー', 'とまと', 'あいす'],
+      answerIndex: 3,
+      explanation: '「アイス」は「あいす」と よむよ。',
+    },
+    {
+      question: 'この カタカナの ことばの よみは どれ？',
+      visual: 'ケーキ',
+      choices: ['けーき', 'ぎたー', 'ぺんぎん', 'めろん'],
+      answerIndex: 0,
+      explanation: '「ケーキ」は「けーき」と よむよ。',
+    },
+    {
+      question: 'この カタカナの ことばの よみは どれ？',
+      visual: 'ジュース',
+      choices: ['さっかー', 'じゅーす', 'らいおん', 'れもん'],
+      answerIndex: 1,
+      explanation: '「ジュース」は「じゅーす」と よむよ。',
+    },
+    {
+      question: 'この カタカナの ことばの よみは どれ？',
+      visual: 'バナナ',
+      choices: ['ぷーる', 'こあら', 'ばなな', 'よーぐると'],
+      answerIndex: 2,
+      explanation: '「バナナ」は「ばなな」と よむよ。',
+    },
+    {
+      question: 'この カタカナの ことばの よみは どれ？',
+      visual: 'ピアノ',
+      choices: ['ばす', 'ぱんだ', 'ちょこれーと', 'ぴあの'],
+      answerIndex: 3,
+      explanation: '「ピアノ」は「ぴあの」と よむよ。',
+    },
+    {
+      question: 'この カタカナの ことばの よみは どれ？',
+      visual: 'ギター',
+      choices: ['ぎたー', 'たくしー', 'とまと', 'ぱん'],
+      answerIndex: 0,
+      explanation: '「ギター」は「ぎたー」と よむよ。',
+    },
+    {
+      question: 'この カタカナの ことばの よみは どれ？',
+      visual: 'サッカー',
+      choices: ['ぺんぎん', 'さっかー', 'めろん', 'あいす'],
+      answerIndex: 1,
+      explanation: '「サッカー」は「さっかー」と よむよ。',
+    },
+    {
+      question: 'この カタカナの ことばの よみは どれ？',
+      visual: 'プール',
+      choices: ['らいおん', 'れもん', 'ぷーる', 'けーき'],
+      answerIndex: 2,
+      explanation: '「プール」は「ぷーる」と よむよ。',
+    },
+    {
+      question: 'この カタカナの ことばの よみは どれ？',
+      visual: 'バス',
+      choices: ['こあら', 'よーぐると', 'じゅーす', 'ばす'],
+      answerIndex: 3,
+      explanation: '「バス」は「ばす」と よむよ。',
+    },
+    {
+      question: 'この カタカナの ことばの よみは どれ？',
+      visual: 'タクシー',
+      choices: ['たくしー', 'ぱんだ', 'ちょこれーと', 'ばなな'],
+      answerIndex: 0,
+      explanation: '「タクシー」は「たくしー」と よむよ。',
+    },
+    {
+      question: 'この カタカナの ことばの よみは どれ？',
+      visual: 'ペンギン',
+      choices: ['とまと', 'ぺんぎん', 'ぱん', 'ぴあの'],
+      answerIndex: 1,
+      explanation: '「ペンギン」は「ぺんぎん」と よむよ。',
+    },
+    {
+      question: 'この カタカナの ことばの よみは どれ？',
+      visual: 'ライオン',
+      choices: ['めろん', 'あいす', 'らいおん', 'ぎたー'],
+      answerIndex: 2,
+      explanation: '「ライオン」は「らいおん」と よむよ。',
+    },
+    {
+      question: 'この カタカナの ことばの よみは どれ？',
+      visual: 'コアラ',
+      choices: ['れもん', 'けーき', 'さっかー', 'こあら'],
+      answerIndex: 3,
+      explanation: '「コアラ」は「こあら」と よむよ。',
+    },
+    {
+      question: 'この カタカナの ことばの よみは どれ？',
+      visual: 'パンダ',
+      choices: ['ぱんだ', 'よーぐると', 'じゅーす', 'ぷーる'],
+      answerIndex: 0,
+      explanation: '「パンダ」は「ぱんだ」と よむよ。',
+    },
+    {
+      question: 'この カタカナの ことばの よみは どれ？',
+      visual: 'トマト',
+      choices: ['ちょこれーと', 'とまと', 'ばなな', 'ばす'],
+      answerIndex: 1,
+      explanation: '「トマト」は「とまと」と よむよ。',
+    },
+    {
+      question: 'この カタカナの ことばの よみは どれ？',
+      visual: 'メロン',
+      choices: ['ぱん', 'ぴあの', 'めろん', 'たくしー'],
+      answerIndex: 2,
+      explanation: '「メロン」は「めろん」と よむよ。',
+    },
+    {
+      question: 'この カタカナの ことばの よみは どれ？',
+      visual: 'レモン',
+      choices: ['あいす', 'ぎたー', 'ぺんぎん', 'れもん'],
+      answerIndex: 3,
+      explanation: '「レモン」は「れもん」と よむよ。',
+    },
+    {
+      question: 'この カタカナの ことばの よみは どれ？',
+      visual: 'ヨーグルト',
+      choices: ['よーぐると', 'けーき', 'さっかー', 'らいおん'],
+      answerIndex: 0,
+      explanation: '「ヨーグルト」は「よーぐると」と よむよ。',
+    },
+    {
+      question: 'この カタカナの ことばの よみは どれ？',
+      visual: 'チョコレート',
+      choices: ['じゅーす', 'ちょこれーと', 'ぷーる', 'こあら'],
+      answerIndex: 1,
+      explanation: '「チョコレート」は「ちょこれーと」と よむよ。',
     },
   ],
 };
