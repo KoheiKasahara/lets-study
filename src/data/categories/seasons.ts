@@ -142,5 +142,53 @@ export const seasonsQuiz: CategoryQuiz = {
       answerIndex: 3,
       explanation: 'はれの ひは あおい そらと たいようが みえるよ。',
     },
+    {
+      question: '3がつに ある、おんなのこの おまつりは どれ？',
+      choices: ['ひなまつり', 'たなばた', 'クリスマス', 'せつぶん'],
+      answerIndex: 0,
+      explanation: 'ひなまつりは 3がつ3にち。ひなにんぎょうを かざるよ。',
+    },
+    {
+      question: '5がつ5にちに かざる、こいの かたちは どれ？',
+      choices: ['こいのぼり', 'かぶとだけ', 'さくら', 'ゆきだるま'],
+      answerIndex: 0,
+      explanation: 'こどもの ひに、こいのぼりを あげるよ。',
+    },
+    {
+      question: '7がつ7にち、ささに ねがいを かくのは どれ？',
+      choices: ['ひなまつり', 'たなばた', 'おつきみ', 'ハロウィン'],
+      answerIndex: 1,
+      explanation: 'たんざくに ねがいを かいて かざるよ。',
+    },
+    {
+      question: 'なつの よるに そらに ひらく おおきな はなは どれ？',
+      choices: ['さくら', 'はなび', 'ゆき', 'ほしだけ'],
+      answerIndex: 1,
+      explanation: 'はなびたいかいは なつの たのしみだよ。',
+    },
+    {
+      question: 'あきに まんまるの つきを みるのは どれ？',
+      choices: ['おつきみ', 'はなみ', 'ゆきみ', 'たなばた'],
+      answerIndex: 0,
+      explanation: 'おだんごを おそなえして、つきを みるよ。',
+    },
+    {
+      question: '10がつ31にち、かそうを する おまつりは どれ？',
+      choices: ['クリスマス', 'ハロウィン', 'せつぶん', 'ひなまつり'],
+      answerIndex: 1,
+      explanation: '「トリック オア トリート！」と いうよ。',
+    },
+    {
+      question: '12がつ25にち、サンタさんが くるのは どれ？',
+      choices: ['おしょうがつ', 'クリスマス', 'たなばた', 'こどもの ひ'],
+      answerIndex: 1,
+      explanation: 'クリスマスには プレゼントが たのしみだね。',
+    },
+    {
+      question: '1がつ1にちは なんの ひ？',
+      choices: ['ハロウィン', 'おしょうがつ', 'うんどうかい', 'たんじょうび'],
+      answerIndex: 1,
+      explanation: 'あたらしい としの はじまりだよ。おとしだまが たのしみだね。',
+    },
   ],
 };

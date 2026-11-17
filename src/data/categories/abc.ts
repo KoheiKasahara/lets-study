@@ -2,7 +2,7 @@ import type { CategoryQuiz } from '../../types';
 import { defaultDifficulties } from './difficulties';
 
 /**
- * ABCクイズ：アルファベットの名前（大文字26問＋小文字26問）と、その文字から始まる英単語（24問）。
+ * ABCクイズ：アルファベットの名前（大文字26問＋小文字26問＋順番10問）と、その文字から始まる英単語（24問）。
  */
 export const abcQuiz: CategoryQuiz = {
   category: {
@@ -545,6 +545,66 @@ export const abcQuiz: CategoryQuiz = {
       choices: ['ゼット', 'エフ', 'エム', 'ティー'],
       answerIndex: 0,
       explanation: '「z」は おおもじの「Z」と おなじ もじ。「ゼット」と よむよ。',
+    },
+    {
+      question: '「A」の つぎの もじは どれ？',
+      choices: ['B', 'F', 'K', 'Q'],
+      answerIndex: 0,
+      explanation: 'ABCの じゅんばんで、「A」の つぎは「B」だよ。',
+    },
+    {
+      question: '「C」の つぎの もじは どれ？',
+      choices: ['H', 'D', 'M', 'S'],
+      answerIndex: 1,
+      explanation: 'ABCの じゅんばんで、「C」の つぎは「D」だよ。',
+    },
+    {
+      question: '「E」の つぎの もじは どれ？',
+      choices: ['J', 'O', 'F', 'U'],
+      answerIndex: 2,
+      explanation: 'ABCの じゅんばんで、「E」の つぎは「F」だよ。',
+    },
+    {
+      question: '「G」の つぎの もじは どれ？',
+      choices: ['L', 'Q', 'W', 'H'],
+      answerIndex: 3,
+      explanation: 'ABCの じゅんばんで、「G」の つぎは「H」だよ。',
+    },
+    {
+      question: '「J」の つぎの もじは どれ？',
+      choices: ['K', 'O', 'T', 'Z'],
+      answerIndex: 0,
+      explanation: 'ABCの じゅんばんで、「J」の つぎは「K」だよ。',
+    },
+    {
+      question: '「M」の つぎの もじは どれ？',
+      choices: ['R', 'N', 'W', 'C'],
+      answerIndex: 1,
+      explanation: 'ABCの じゅんばんで、「M」の つぎは「N」だよ。',
+    },
+    {
+      question: '「P」の つぎの もじは どれ？',
+      choices: ['U', 'Z', 'Q', 'F'],
+      answerIndex: 2,
+      explanation: 'ABCの じゅんばんで、「P」の つぎは「Q」だよ。',
+    },
+    {
+      question: '「S」の つぎの もじは どれ？',
+      choices: ['X', 'C', 'I', 'T'],
+      answerIndex: 3,
+      explanation: 'ABCの じゅんばんで、「S」の つぎは「T」だよ。',
+    },
+    {
+      question: '「V」の つぎの もじは どれ？',
+      choices: ['W', 'A', 'F', 'L'],
+      answerIndex: 0,
+      explanation: 'ABCの じゅんばんで、「V」の つぎは「W」だよ。',
+    },
+    {
+      question: '「X」の つぎの もじは どれ？',
+      choices: ['C', 'Y', 'H', 'N'],
+      answerIndex: 1,
+      explanation: 'ABCの じゅんばんで、「X」の つぎは「Y」だよ。',
     },
   ],
 };

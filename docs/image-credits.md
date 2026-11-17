@@ -190,3 +190,29 @@
 | instruments/harmonica.jpg  | https://commons.wikimedia.org/wiki/File:16-hole_chrom_10-hole_diatonic.jpg                                                                           | CC BY-SA 3.0  | George Leung                                                                                                             |
 | instruments/xylophone.jpg  | https://commons.wikimedia.org/wiki/File:The_Xylophone_kids.jpg                                                                                       | CC BY 4.0     | Dappasolomon001                                                                                                          |
 | instruments/maracas.jpg    | https://commons.wikimedia.org/wiki/File:Maracas_from_Africa.jpg                                                                                      | CC BY-SA 4.0  | Serg Childed                                                                                                             |
+
+## どうぶつ追加分（animals）
+
+| ファイル             | 出典ページ                                                                               | ライセンス    | 作者                                    |
+| -------------------- | ---------------------------------------------------------------------------------------- | ------------- | --------------------------------------- |
+| animals/alpaca.jpg   | https://commons.wikimedia.org/wiki/File:Dülmen,_Börnste,_Alpakas_--_2020_--_5462.jpg     | CC BY-SA 4.0  | Dietmar Rabich                          |
+| animals/capybara.jpg | https://commons.wikimedia.org/wiki/File:Capivara(Hydrochoerus_hydrochaeris).jpg          | CC BY-SA 4.0  | Clodomiro Esteves Junior                |
+| animals/hedgehog.jpg | https://commons.wikimedia.org/wiki/File:Erinaceus_europaeus_(Linnaeus,_1758).jpg         | CC BY-SA 3.0  | Michael Gäbler                          |
+| animals/redpanda.jpg | https://commons.wikimedia.org/wiki/File:Red_Panda_(24986761703).jpg                      | CC0           | Mathias Appel                           |
+| animals/meerkat.jpg  | https://commons.wikimedia.org/wiki/File:Meerkat_(Suricata_suricatta).jpg                 | CC BY-SA 4.0  | Hans Hillewaert                         |
+| animals/sloth.jpg    | https://commons.wikimedia.org/wiki/File:Bradypus.jpg                                     | Public domain | Stefan Laube (Tauchgurke)               |
+| animals/otter.jpg    | https://commons.wikimedia.org/wiki/File:European_otter_02.jpg                            | CC BY-SA 4.0  | Alexander Leisser                       |
+| animals/wombat.jpg   | https://commons.wikimedia.org/wiki/File:Vombatus_ursinus_-Maria_Island_National_Park.jpg | CC BY-SA 3.0  | JJ Harrison (jjharrison89@facebook.com) |
+| animals/quokka.jpg   | https://commons.wikimedia.org/wiki/File:Rottnest_Quokka_2004_SeanMcClean.jpg             | CC BY-SA 3.0  | en:User:SeanMack                        |
+| animals/beaver.jpg   | https://commons.wikimedia.org/wiki/File:Beaver_swimming_(14895922186).jpg                | Public domain | BLM Alaska                              |
+
+## のりもの追加分（vehicles）
+
+| ファイル                | 出典ページ                                                                                                     | ライセンス   | 作者                    |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------- | ------------ | ----------------------- |
+| vehicles/shinkansen.jpg | https://commons.wikimedia.org/wiki/File:Line_scan_photo_of_Shinkansen_N700A_Series_Set_G13_in_2017,_car_16.png | CC BY-SA 4.0 | Dllu                    |
+| vehicles/steamloco.jpg  | https://commons.wikimedia.org/wiki/File:Steam_locomotive_gear_(JŽ_06-018;_Slovenia).jpg                        | CC BY-SA 4.0 | Petar Milošević         |
+| vehicles/cablecar.jpg   | https://commons.wikimedia.org/wiki/File:Aso_sensuikyo_ropeway_gondola.jpg                                      | CC BY-SA 3.0 | K.F.                    |
+| vehicles/monorail.jpg   | https://commons.wikimedia.org/wiki/File:Tama-Dōbutsukōen_Station_2.jpg                                         | CC0          | Syced                   |
+| vehicles/balloon.jpg    | https://commons.wikimedia.org/wiki/File:Cappadocia_Balloon_Inflating_Wikimedia_Commons.JPG                     | CC BY-SA 3.0 | Benh LIEU SONG (Flickr) |
+| vehicles/yacht.jpg      | https://commons.wikimedia.org/wiki/File:Sailboat_with_spinnaker_17RM0454.jpg                                   | CC BY-SA 4.0 | Ermell                  |
