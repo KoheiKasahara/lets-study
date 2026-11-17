@@ -1,0 +1,136 @@
+import type { CategoryQuiz } from '../../types';
+import { defaultDifficulties } from './difficulties';
+
+/** はなクイズ：写真で名前を当てる問題と、季節のテキスト問題（18問） */
+export const flowersQuiz: CategoryQuiz = {
+  category: {
+    id: 'flowers',
+    name: 'はな',
+    icon: '🌸',
+    color: '#fce4ec',
+    description: 'はなの なまえや さく きせつの クイズ',
+  },
+  difficulties: defaultDifficulties,
+  questions: [
+    {
+      question: 'この はなは なあに？',
+      image: 'flowers/sakura.jpg',
+      choices: ['さくら', 'うめ', 'もも', 'ばら'],
+      answerIndex: 0,
+      explanation: 'はるに さく ピンクの はな。おはなみを するね。',
+    },
+    {
+      question: 'この はなは なあに？',
+      image: 'flowers/tulip.jpg',
+      choices: ['ゆり', 'チューリップ', 'ばら', 'すみれ'],
+      answerIndex: 1,
+      explanation: 'はるに さく、コップみたいな かたちの はなだよ。',
+    },
+    {
+      question: 'この はなは なあに？',
+      image: 'flowers/sunflower.jpg',
+      choices: ['たんぽぽ', 'コスモス', 'ひまわり', 'パンジー'],
+      answerIndex: 2,
+      explanation: 'なつに さく おおきな きいろい はな。たいようの ほうを むくよ。',
+    },
+    {
+      question: 'この はなは なあに？',
+      image: 'flowers/rose.jpg',
+      choices: ['さくら', 'ゆり', 'チューリップ', 'ばら'],
+      answerIndex: 3,
+      explanation: 'あかい はなが めじるし。くきに トゲが あるよ。',
+    },
+    {
+      question: 'この はなは なあに？',
+      image: 'flowers/dandelion.jpg',
+      choices: ['たんぽぽ', 'ひまわり', 'コスモス', 'あじさい'],
+      answerIndex: 0,
+      explanation: 'きいろい はなの あと、しろい わたげに なるよ。',
+    },
+    {
+      question: 'この はなは なあに？',
+      image: 'flowers/morningglory.jpg',
+      choices: ['ゆり', 'あさがお', 'すみれ', 'パンジー'],
+      answerIndex: 1,
+      explanation: 'なつの あさに さく、ラッパみたいな かたちだよ。',
+    },
+    {
+      question: 'この はなは なあに？',
+      image: 'flowers/lily.jpg',
+      choices: ['ばら', 'さくら', 'ゆり', 'チューリップ'],
+      answerIndex: 2,
+      explanation: 'おおきくて いい かおりが する はなだよ。',
+    },
+    {
+      question: 'この はなは なあに？',
+      image: 'flowers/violet.jpg',
+      choices: ['パンジー', 'コスモス', 'たんぽぽ', 'すみれ'],
+      answerIndex: 3,
+      explanation: 'むらさきの ちいさな はな。はるに さくよ。',
+    },
+    {
+      question: 'この はなは なあに？',
+      image: 'flowers/cosmos.jpg',
+      choices: ['コスモス', 'ひまわり', 'あさがお', 'ゆり'],
+      answerIndex: 0,
+      explanation: 'あきに さく ピンクや しろの はなだよ。',
+    },
+    {
+      question: 'この はなは なあに？',
+      image: 'flowers/pansy.jpg',
+      choices: ['すみれ', 'パンジー', 'ばら', 'たんぽぽ'],
+      answerIndex: 1,
+      explanation: 'かおみたいな もようが おもしろい はなだよ。',
+    },
+    {
+      question: 'この はなは なあに？',
+      image: 'flowers/hydrangea.jpg',
+      choices: ['さくら', 'チューリップ', 'あじさい', 'コスモス'],
+      answerIndex: 2,
+      explanation: 'つゆの ころに さく、まるく あつまった はなだよ。あおや ピンクが あるよ。',
+    },
+    {
+      question: 'この はなは なあに？',
+      image: 'flowers/daisy.jpg',
+      choices: ['ひまわり', 'あさがお', 'ばら', 'ひなぎく'],
+      answerIndex: 3,
+      explanation: 'しろい はなびらと、まんなかの きいろが めじるしだよ。',
+    },
+    {
+      question: 'さくらが さく きせつは どれ？',
+      choices: ['はる', 'なつ', 'あき', 'ふゆ'],
+      answerIndex: 0,
+      explanation: 'さくらは はるの はなだよ。',
+    },
+    {
+      question: 'ひまわりが さく きせつは どれ？',
+      choices: ['はる', 'なつ', 'あき', 'ふゆ'],
+      answerIndex: 1,
+      explanation: 'ひまわりは あつい なつに さくよ。',
+    },
+    {
+      question: 'コスモスが さく きせつは どれ？',
+      choices: ['はる', 'なつ', 'あき', 'ふゆ'],
+      answerIndex: 2,
+      explanation: 'コスモスは あきの はなだよ。',
+    },
+    {
+      question: 'たんぽぽの わたげは なんの ため？',
+      choices: ['およぐ ため', 'うたう ため', 'ねむる ため', 'たねを とばす ため'],
+      answerIndex: 3,
+      explanation: 'かぜに のって、たねを とおくへ はこぶよ。',
+    },
+    {
+      question: 'はなが さくのに ひつようなのは どれ？',
+      choices: ['たいようの ひかりと みず', 'ゆきだけ', 'でんしゃ', 'テレビ'],
+      answerIndex: 0,
+      explanation: 'ひかりと みずで、はなは げんきに そだつよ。',
+    },
+    {
+      question: 'あじさいの はなの いろが かわるのは なぜ？',
+      choices: ['うたうから', 'つちの せいしつで かわる', 'およぐから', 'ねむるから'],
+      answerIndex: 1,
+      explanation: 'つちの せいしつで、あおく なったり ピンクに なったり するよ。',
+    },
+  ],
+};
