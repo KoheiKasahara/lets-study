@@ -46,6 +46,14 @@
   }
 }
 
+/* モンスター・ずかんへの導線ボタン */
+.home__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
 /* 高さが足りない画面では案内文を省く */
 @media (max-height: 480px) {
   .home__lead {

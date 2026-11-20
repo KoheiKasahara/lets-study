@@ -31,6 +31,59 @@
   color: var(--color-text-sub);
 }
 
+/* ---------- モンスターの成長 ---------- */
+
+.result__monster-hint {
+  font-size: var(--font-s);
+  color: var(--color-text-sub);
+}
+
+.result__monsters {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.result__xp {
+  font-size: var(--font-l);
+  font-weight: 700;
+}
+
+.result__monster-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.result__monster {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.result__monster-figure {
+  width: min(72px, 18vw);
+}
+
+.result__monster-name {
+  font-size: var(--font-xs);
+  color: var(--color-text-sub);
+}
+
+.result__evolved {
+  font-size: var(--font-s);
+  font-weight: 700;
+  color: var(--color-correct);
+}
+
+.result__egg {
+  font-size: var(--font-m);
+  font-weight: 700;
+}
+
 .result__buttons {
   display: flex;
   flex-direction: column;
