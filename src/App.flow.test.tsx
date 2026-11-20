@@ -1,12 +1,17 @@
 // @vitest-environment jsdom
-import { fireEvent, render, screen } from '@testing-library/react';
-import { beforeAll, describe, expect, it } from 'vitest';
+import { act, cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import App from './App';
 import { animalsQuiz } from './data/categories/animals';
 
 // jsdom は scrollTo を実装していないので空の関数に差し替える
 beforeAll(() => {
   window.scrollTo = () => {};
+});
+
+// 画面はテストごとに片付ける（前のテストのボタンが残ると名前で探すときに衝突する）
+afterEach(() => {
+  cleanup();
 });
 
 /** 表示中の選択肢ボタンのうち最初のものを押し、フィードバックの「つぎへ」を押す */
@@ -60,6 +65,114 @@ describe('画面の基本フロー', () => {
     expect(screen.getByText('ぜんぶ おわった！')).toBeTruthy();
     expect(screen.getByText(new RegExp(`ぜんぶで ${totalQuestions}もんちゅう`))).toBeTruthy();
     expect(screen.getByRole('button', { name: /さいしょから あそぶ/ })).toBeTruthy();
+  });
+
+  it('モンスター：スターターを選ぶと一覧に出て、クイズ結果でXPがたまる', () => {
+    localStorage.clear();
+    render(<App />);
+
+    // ホームから育成画面へ
+    fireEvent.click(screen.getByRole('button', { name: /モンスターを そだてる/ }));
+    expect(screen.getByText('スターターを えらんでね！')).toBeTruthy();
+
+    // スターター（ひのこ）を選ぶと一覧に出る
+    fireEvent.click(screen.getByRole('button', { name: /ひのこ/ }));
+    expect(screen.getByText('レベル 1')).toBeTruthy();
+
+    // ホームへ戻ってクイズを1セット解く
+    fireEvent.click(screen.getByRole('button', { name: /もどる/ }));
+    fireEvent.click(screen.getByRole('button', { name: /どうぶつ/ }));
+    fireEvent.click(screen.getByRole('button', { name: /やさしい/ }));
+    for (let i = 0; i < 10; i++) answerOneQuestion();
+
+    // 結果画面：経験値がたまった表示とモンスターの姿が出る
+    expect(screen.getByText(/XP たまった！/)).toBeTruthy();
+    expect(screen.getByText(/ひのこ/)).toBeTruthy();
+  });
+
+  it('モンスター：配合で新しいモンスターが生まれ、たまごもかえる', () => {
+    localStorage.clear();
+    localStorage.setItem(
+      'lets-study:monsters:v1',
+      JSON.stringify({
+        monsters: [
+          {
+            id: 'a',
+            shapeSpeciesId: 'honoo',
+            colorSpeciesId: 'honoo',
+            name: 'ひのこ',
+            xp: 0,
+            generation: 1,
+          },
+          {
+            id: 'b',
+            shapeSpeciesId: 'mizu',
+            colorSpeciesId: 'mizu',
+            name: 'みずたま',
+            xp: 0,
+            generation: 1,
+          },
+        ],
+        totalCorrect: 30,
+        eggs: 1,
+        trophies: 0,
+        nextId: 3,
+      }),
+    );
+    render(<App />);
+
+    fireEvent.click(screen.getByRole('button', { name: /モンスターを そだてる/ }));
+
+    // 2ひき選んで配合すると合成名の子が生まれる（ひのこ×みずたま→ひのたま）
+    fireEvent.click(screen.getByRole('button', { name: /ひのこ/ }));
+    fireEvent.click(screen.getByRole('button', { name: /みずたま/ }));
+    fireEvent.click(screen.getByRole('button', { name: /ごうたい/ }));
+    expect(screen.getByText(/ひのたまが うまれた！/)).toBeTruthy();
+
+    // たまごをかえすと新しいモンスターが生まれる
+    fireEvent.click(screen.getByRole('button', { name: /たまごを かえす/ }));
+    expect(screen.getByText(/が うまれた！/)).toBeTruthy();
+  });
+
+  it('とうぎじょう：モンスターを選ぶとバトルが進んで結果が出る', () => {
+    localStorage.clear();
+    localStorage.setItem(
+      'lets-study:monsters:v1',
+      JSON.stringify({
+        monsters: [
+          {
+            id: 'a',
+            shapeSpeciesId: 'honoo',
+            colorSpeciesId: 'honoo',
+            name: 'ひのこ',
+            xp: 0,
+            generation: 1,
+          },
+        ],
+        totalCorrect: 0,
+        eggs: 0,
+        trophies: 0,
+        nextId: 2,
+      }),
+    );
+    vi.useFakeTimers();
+    try {
+      render(<App />);
+      fireEvent.click(screen.getByRole('button', { name: /とうぎじょう/ }));
+      fireEvent.click(screen.getByRole('button', { name: /ひのこ/ }));
+
+      // バトルが始まり、タイマーで自動的に進む
+      expect(screen.getByText(/たたかい スタート！/)).toBeTruthy();
+      for (let i = 0; i < 120 && !screen.queryByText(/かった！|がんばったね！/); i++) {
+        act(() => {
+          vi.advanceTimersByTime(1000);
+        });
+      }
+      expect(screen.getByText(/かった！|がんばったね！/)).toBeTruthy();
+      expect(screen.getByText(/XP たまった/)).toBeTruthy();
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it('こっき ずかんが開けて、地域フィルターと検索が効く', () => {

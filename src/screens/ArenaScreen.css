@@ -1,0 +1,204 @@
+.arena__lead {
+  font-size: var(--font-m);
+  color: var(--color-text-sub);
+  text-align: center;
+}
+
+/* スマホ縦は2列、広い画面は3列 */
+.arena__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+@media (min-width: 560px) {
+  .arena__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.arena__card {
+  gap: var(--space-2);
+}
+
+.arena__card-figure {
+  width: min(96px, 40%);
+}
+
+.arena__card-name {
+  font-size: var(--font-m);
+  font-weight: 700;
+}
+
+.arena__card-stats {
+  font-size: var(--font-xs);
+  color: var(--color-text-sub);
+}
+
+/* ---------- バトル ---------- */
+
+.arena__stage {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--space-4);
+}
+
+.arena__fighter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  flex: 1;
+  max-width: 260px;
+}
+
+.arena__figure {
+  position: relative;
+  width: min(160px, 60%);
+}
+
+.arena__sleep {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: var(--font-l);
+}
+
+.arena__fighter.is-sleeping .arena__figure {
+  opacity: 0.55;
+}
+
+/* 攻撃：相手へ少し飛び込む。ステージの key が手ごとに変わるので毎回再生される */
+@keyframes arena-attack {
+  0% {
+    transform: translateX(0);
+  }
+  40% {
+    transform: translateX(10%) scale(1.06);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes arena-hit {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4%);
+  }
+  75% {
+    transform: translateX(4%);
+  }
+}
+
+.arena__fighter.is-attacking .arena__figure {
+  animation: arena-attack 0.45s ease;
+}
+
+.arena__fighter.is-hit .arena__figure {
+  animation: arena-hit 0.35s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arena__fighter.is-attacking .arena__figure,
+  .arena__fighter.is-hit .arena__figure {
+    animation: none;
+  }
+}
+
+.arena__vs {
+  font-size: var(--font-l);
+  font-weight: 700;
+  align-self: center;
+  color: var(--color-text-sub);
+}
+
+.arena__fighter-name {
+  font-size: var(--font-m);
+  font-weight: 700;
+  text-align: center;
+}
+
+.arena__hpbar {
+  display: block;
+  width: 100%;
+  height: var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--color-secondary);
+  overflow: hidden;
+}
+
+.arena__hpbar-inner {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--color-correct);
+  transition: width 0.4s ease;
+}
+
+.arena__hpbar-inner.is-low {
+  background: var(--color-wrong);
+}
+
+.arena__hp {
+  font-size: var(--font-s);
+  color: var(--color-text-sub);
+}
+
+.arena__log {
+  font-size: var(--font-m);
+  text-align: center;
+  min-height: var(--tap-min);
+}
+
+.arena__result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+}
+
+.arena__result-title {
+  font-size: var(--font-l);
+  font-weight: 700;
+}
+
+.arena__result-text {
+  font-size: var(--font-m);
+  color: var(--color-text-sub);
+}
+
+.arena__result-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 420px;
+}
+
+/* 横長：ステージを広く使う */
+@media (orientation: landscape) and (min-width: 560px) {
+  .arena__fighter {
+    max-width: 320px;
+  }
+
+  .arena__figure {
+    width: min(180px, 50%);
+  }
+}
+
+/* 高さが足りない画面では姿を小さくして1画面に収める */
+@media (max-height: 480px) {
+  .arena__figure {
+    width: min(96px, 44%);
+  }
+
+  .arena__log {
+    min-height: 0;
+  }
+}

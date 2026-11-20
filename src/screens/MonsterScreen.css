@@ -1,0 +1,110 @@
+.monsters__notice {
+  font-size: var(--font-m);
+  font-weight: 700;
+  text-align: center;
+  padding: var(--space-3);
+  border-radius: var(--radius-m);
+  background: var(--color-correct-soft);
+}
+
+.monsters__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.monsters__lead {
+  font-size: var(--font-m);
+  color: var(--color-text-sub);
+  text-align: center;
+}
+
+/* スマホ縦は2列、広い画面は3列 */
+.monsters__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+  width: 100%;
+}
+
+@media (min-width: 560px) {
+  .monsters__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.monsters__card {
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.monsters__card.is-selected {
+  border-color: var(--color-primary);
+  background: var(--color-correct-soft);
+}
+
+.monsters__figure {
+  width: min(96px, 40%);
+}
+
+.monsters__name {
+  font-size: var(--font-m);
+  font-weight: 700;
+}
+
+.monsters__generation {
+  font-size: var(--font-xs);
+  font-weight: 400;
+  color: var(--color-text-sub);
+}
+
+.monsters__desc,
+.monsters__level {
+  font-size: var(--font-s);
+  color: var(--color-text-sub);
+}
+
+.monsters__xpbar {
+  display: block;
+  width: 100%;
+  height: var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--color-secondary);
+  overflow: hidden;
+}
+
+.monsters__xpbar-inner {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary);
+}
+
+.monsters__stats {
+  font-size: var(--font-xs);
+  color: var(--color-text-sub);
+}
+
+.monsters__egg,
+.monsters__fusion {
+  padding: var(--space-4);
+  border: 3px solid var(--color-border-soft);
+  border-radius: var(--radius-m);
+  background: var(--color-surface);
+}
+
+.monsters__fusion .button:disabled {
+  opacity: 0.5;
+}
+
+/* 高さが足りない画面では飾りを詰める */
+@media (max-height: 480px) {
+  .monsters__figure {
+    width: min(64px, 32%);
+  }
+
+  .monsters__section {
+    gap: var(--space-2);
+  }
+}

@@ -1,0 +1,6 @@
+/* ドット絵モンスター：親の幅に合わせて正方形で表示する */
+.pixel-monster {
+  display: block;
+  width: 100%;
+  height: auto;
+}

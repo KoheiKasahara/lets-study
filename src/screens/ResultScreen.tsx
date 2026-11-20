@@ -1,3 +1,11 @@
+import { PixelMonster } from '../components/PixelMonster';
+import {
+  displayName,
+  levelFromXp,
+  stageOfMonster,
+  type GrowthReport,
+  type OwnedMonster,
+} from '../monsters';
 import type { BlockResult } from '../quiz/foundation';
 import { praiseFor } from '../quiz/praise';
 import type { CategoryQuiz } from '../types';
@@ -13,6 +21,10 @@ interface Props {
   totalAnswered: number;
   /** まだ出題していない問題が残っているか（残っていなければ「ぜんぶおわった」） */
   canContinue: boolean;
+  /** このセットで育ったモンスターたち（経験値付与後の状態） */
+  monsters: OwnedMonster[];
+  /** このセットの成長報告（経験値・進化・たまご） */
+  growth: GrowthReport | null;
   /** 次のセットへ進む */
   onContinue: () => void;
   /** 最初から遊び直す（問題プールをリセット） */
@@ -27,11 +39,14 @@ export function ResultScreen({
   totalCorrect,
   totalAnswered,
   canContinue,
+  monsters,
+  growth,
   onContinue,
   onRestart,
   onHome,
 }: Props) {
   const { correct, total } = blockResult;
+  const evolvedIds = new Set(growth?.evolutions.map((evolution) => evolution.monsterId) ?? []);
   return (
     <div className="screen result">
       <div className="result__summary">
@@ -50,6 +65,40 @@ export function ResultScreen({
           ぜんぶで {totalAnswered}もんちゅう <strong>{totalCorrect}もん</strong> せいかい！
         </p>
         <p className="result__praise">{praiseFor(correct, total)}</p>
+        {growth && monsters.length === 0 && (
+          <p className="result__monster-hint">
+            モンスターを そだてると クイズで けいけんちが たまるよ！
+          </p>
+        )}
+        {growth && monsters.length > 0 && (
+          <div className="result__monsters">
+            <p className="result__xp">{growth.xpGain} XP たまった！</p>
+            <div className="result__monster-row">
+              {monsters.map((monster) => (
+                <div key={monster.id} className="result__monster">
+                  <span className="result__monster-figure">
+                    <PixelMonster
+                      shapeSpeciesId={monster.shapeSpeciesId}
+                      colorSpeciesId={monster.colorSpeciesId}
+                      stage={stageOfMonster(monster)}
+                    />
+                  </span>
+                  <span className="result__monster-name">
+                    {displayName(monster)}（レベル {levelFromXp(monster.xp)}）
+                  </span>
+                  {evolvedIds.has(monster.id) && (
+                    <span className="result__evolved">✨ しんかした！</span>
+                  )}
+                </div>
+              ))}
+            </div>
+            {growth.eggsGained > 0 && (
+              <p className="result__egg">
+                🥚 たまごを もらった！「モンスターを そだてる」で みてね
+              </p>
+            )}
+          </div>
+        )}
       </div>
       <div className="result__buttons">
         {canContinue ? (

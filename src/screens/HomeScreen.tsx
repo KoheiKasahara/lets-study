@@ -5,10 +5,12 @@ interface Props {
   quizzes: CategoryQuiz[];
   onSelect: (quiz: CategoryQuiz) => void;
   onOpenGuide: () => void;
+  onOpenMonsters: () => void;
+  onOpenArena: () => void;
 }
 
 /** ホーム画面：カテゴリを大きなカードで選ぶ */
-export function HomeScreen({ quizzes, onSelect, onOpenGuide }: Props) {
+export function HomeScreen({ quizzes, onSelect, onOpenGuide, onOpenMonsters, onOpenArena }: Props) {
   return (
     <div className="screen home">
       <h1 className="home__title">レッツスタディ</h1>
@@ -30,9 +32,17 @@ export function HomeScreen({ quizzes, onSelect, onOpenGuide }: Props) {
           </button>
         ))}
       </div>
-      <button type="button" className="button button--secondary" onClick={onOpenGuide}>
-        🚩 こっき ずかん
-      </button>
+      <div className="home__links">
+        <button type="button" className="button button--secondary" onClick={onOpenMonsters}>
+          🐾 モンスターを そだてる
+        </button>
+        <button type="button" className="button button--secondary" onClick={onOpenArena}>
+          🏟️ とうぎじょう
+        </button>
+        <button type="button" className="button button--secondary" onClick={onOpenGuide}>
+          🚩 こっき ずかん
+        </button>
+      </div>
     </div>
   );
 }
