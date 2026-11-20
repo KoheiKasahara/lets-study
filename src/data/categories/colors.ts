@@ -155,5 +155,53 @@ export const colorsQuiz: CategoryQuiz = {
       answerIndex: 3,
       explanation: 'のはらの くさは みどりいろだね。',
     },
+    {
+      question: 'あかと しろを まぜると なにいろ？',
+      choices: ['ピンク', 'みどり', 'あお', 'ちゃいろ'],
+      answerIndex: 0,
+      explanation: 'うすい あかは ピンクだよ。',
+    },
+    {
+      question: 'あおと きいろを まぜると なにいろ？',
+      choices: ['オレンジ', 'むらさき', 'みどり', 'ピンク'],
+      answerIndex: 2,
+      explanation: 'あおと きいろで みどりに なるよ。',
+    },
+    {
+      question: 'あかと あおを まぜると なにいろ？',
+      choices: ['みどり', 'むらさき', 'きいろ', 'はいいろ'],
+      answerIndex: 1,
+      explanation: 'ぶどうの いろだね。',
+    },
+    {
+      question: 'あかと きいろを まぜると なにいろ？',
+      choices: ['オレンジ', 'ピンク', 'みずいろ', 'くろ'],
+      answerIndex: 0,
+      explanation: 'みかんの いろだよ。',
+    },
+    {
+      question: 'くろと しろを まぜると なにいろ？',
+      choices: ['ちゃいろ', 'きみどり', 'はいいろ', 'むらさき'],
+      answerIndex: 2,
+      explanation: 'ねずみいろとも いうよ。',
+    },
+    {
+      question: 'あおと しろを まぜると なにいろ？',
+      choices: ['みずいろ', 'オレンジ', 'あか', 'みどり'],
+      answerIndex: 0,
+      explanation: 'うみや プールの いろだね。',
+    },
+    {
+      question: 'きいろと みどりを まぜると なにいろ？',
+      choices: ['ピンク', 'きみどり', 'くろ', 'しろ'],
+      answerIndex: 1,
+      explanation: 'わかばの いろだよ。',
+    },
+    {
+      question: 'あかと あおと しろを まぜると なにいろ？',
+      choices: ['うすむらさき', 'きいろ', 'みどり', 'オレンジ'],
+      answerIndex: 0,
+      explanation: 'ラベンダーの はなの いろだよ。',
+    },
   ],
 };

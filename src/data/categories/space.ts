@@ -1,0 +1,168 @@
+import type { CategoryQuiz } from '../../types';
+import { defaultDifficulties } from './difficulties';
+
+/** うちゅうクイズ：自作SVGの絵で名前を当てる問題と、宇宙のテキスト問題（22問） */
+export const spaceQuiz: CategoryQuiz = {
+  category: {
+    id: 'space',
+    name: 'うちゅう',
+    icon: '🚀',
+    color: '#e8eaf6',
+    description: 'ほしや わくせいの クイズ',
+  },
+  difficulties: defaultDifficulties,
+  questions: [
+    {
+      question: 'この えの ものは なあに？',
+      image: 'space/sun.svg',
+      choices: ['たいよう', 'つき', 'ちきゅう', 'かせい'],
+      answerIndex: 0,
+      explanation: 'ひるま そらを あかるく するよ。とっても あつい ほしだよ。',
+    },
+    {
+      question: 'この えの ものは なあに？',
+      image: 'space/moon.svg',
+      choices: ['たいよう', 'つき', 'ほし', 'くも'],
+      answerIndex: 1,
+      explanation: 'よるの そらに みえるよ。まんげつや みかづきに かたちが かわるよ。',
+    },
+    {
+      question: 'この えの わくせいは なあに？',
+      image: 'space/earth.svg',
+      choices: ['かせい', 'もくせい', 'ちきゅう', 'どせい'],
+      answerIndex: 2,
+      explanation: 'わたしたちが すむ わくせい。うみが あるから あおく みえるよ。',
+    },
+    {
+      question: 'この えの わくせいは なあに？',
+      image: 'space/mars.svg',
+      choices: ['きんせい', 'すいせい', 'もくせい', 'かせい'],
+      answerIndex: 3,
+      explanation: 'あかく みえる わくせいだよ。',
+    },
+    {
+      question: 'この えの わくせいは なあに？',
+      image: 'space/jupiter.svg',
+      choices: ['もくせい', 'どせい', 'ちきゅう', 'つき'],
+      answerIndex: 0,
+      explanation: 'わくせいの なかで いちばん おおきいよ。しまもようが めじるしだね。',
+    },
+    {
+      question: 'この えの わくせいは なあに？',
+      image: 'space/saturn.svg',
+      choices: ['かせい', 'どせい', 'きんせい', 'すいせい'],
+      answerIndex: 1,
+      explanation: 'おおきな わっかが めじるしだよ。',
+    },
+    {
+      question: 'この えの ものは なあに？',
+      image: 'space/rocket.svg',
+      choices: ['ひこうき', 'ふね', 'ロケット', 'でんしゃ'],
+      answerIndex: 2,
+      explanation: 'うちゅうへ とんで いく のりものだよ。',
+    },
+    {
+      question: 'この えの ものは なあに？',
+      image: 'space/star.svg',
+      choices: ['つき', 'たいよう', 'くも', 'ほし'],
+      answerIndex: 3,
+      explanation: 'よるの そらで キラキラ ひかるよ。',
+    },
+    {
+      question: 'この えの ものは なあに？',
+      image: 'space/comet.svg',
+      choices: ['すいせい', 'ロケット', 'ひこうき', 'つき'],
+      answerIndex: 0,
+      explanation: 'おっぽを ひいて そらを すすむ ほしだよ。ほうきぼしとも いうよ。',
+    },
+    {
+      question: 'この えの ものは なあに？',
+      image: 'space/satellite.svg',
+      choices: ['ロケット', 'じんこうえいせい', 'ひこうき', 'ききゅう'],
+      answerIndex: 1,
+      explanation: 'ちきゅうの まわりを まわって、てんきや ちずの おてつだいを するよ。',
+    },
+    {
+      question: 'わたしたちが すむ わくせいは どれ？',
+      choices: ['かせい', 'もくせい', 'ちきゅう', 'たいよう'],
+      answerIndex: 2,
+      explanation: 'ちきゅうが わたしたちの おうちだよ。',
+    },
+    {
+      question: 'ひるま そらが あかるいのは なぜ？',
+      choices: [
+        'つきが ひかるから',
+        'くもが あるから',
+        'ほしが おおいから',
+        'たいようが ひかるから',
+      ],
+      answerIndex: 3,
+      explanation: 'たいようの ひかりで あかるく なるよ。',
+    },
+    {
+      question: 'よるに みえる ほしの ひかりは どこから？',
+      choices: ['とおくの たいようみたいな ほし', 'でんとう', 'くるまの ライト', 'テレビ'],
+      answerIndex: 0,
+      explanation: 'ほしは とおくで ひかる、たいようみたいな ほしだよ。',
+    },
+    {
+      question: 'つきは どうして ひかって みえる？',
+      choices: [
+        'じぶんで ひかるから',
+        'たいようの ひかりを はねかえすから',
+        'でんきが つくから',
+        'ほしが てらすから',
+      ],
+      answerIndex: 1,
+      explanation: 'たいようの ひかりが あたって ひかって みえるよ。',
+    },
+    {
+      question: 'うちゅうに いく ひとは なんと よばれる？',
+      choices: ['せんすいし', 'パイロット', 'うちゅうひこうし', 'えきいん'],
+      answerIndex: 2,
+      explanation: 'ロケットに のって うちゅうへ いく ひとだよ。',
+    },
+    {
+      question: 'ちきゅうの まわりを まわって いるのは どれ？',
+      choices: ['たいよう', 'かせい', 'もくせい', 'つき'],
+      answerIndex: 3,
+      explanation: 'つきは ちきゅうの まわりを ぐるぐる まわるよ。',
+    },
+    {
+      question: 'ながれぼしを みたら どう する？',
+      choices: ['ねがいごとを する', 'およぐ', 'ねてしまう', 'かくれる'],
+      answerIndex: 0,
+      explanation: 'ながれぼしに ねがいごとを すると いいと いわれるよ。',
+    },
+    {
+      question: 'たいようの まわりを まわる ほしを なんと いう？',
+      choices: ['えいせい', 'わくせい', 'すいせい', 'りゅうせい'],
+      answerIndex: 1,
+      explanation: 'ちきゅうや かせいは、たいようの まわりを まわる わくせいだよ。',
+    },
+    {
+      question: 'うちゅうステーションは どこに ある？',
+      choices: ['うみの なか', 'やまの うえ', 'ちきゅうの まわりの うちゅう', 'ちかの なか'],
+      answerIndex: 2,
+      explanation: 'うちゅうひこうしが とまって しらべものを する ばしょだよ。',
+    },
+    {
+      question: 'ほしを みるための どうぐは どれ？',
+      choices: ['けんびきょう', 'おたま', 'ほうき', 'ぼうえんきょう'],
+      answerIndex: 3,
+      explanation: 'ぼうえんきょうで、とおくの ほしが おおきく みえるよ。',
+    },
+    {
+      question: 'ちきゅうから いちばん ちかい ほしは どれ？',
+      choices: ['たいよう', 'かせい', 'もくせい', 'シリウス'],
+      answerIndex: 0,
+      explanation: 'いちばん ちかい ほしは たいようだよ。',
+    },
+    {
+      question: 'まんげつは どんな かたち？',
+      choices: ['さんかく', 'まるい かたち', 'しかく', 'ほそながい'],
+      answerIndex: 1,
+      explanation: 'まんげつは まんまるだよ。',
+    },
+  ],
+};

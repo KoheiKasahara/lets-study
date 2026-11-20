@@ -282,5 +282,53 @@ export const foodsQuiz: CategoryQuiz = {
       answerIndex: 1,
       explanation: 'チョコレートは あまくて ちゃいろい おかしだよ。',
     },
+    {
+      question: 'さとうの あじは どれ？',
+      choices: ['あまい', 'すっぱい', 'からい', 'しょっぱい'],
+      answerIndex: 0,
+      explanation: 'ケーキは あまいね。',
+    },
+    {
+      question: 'レモンの あじは どれ？',
+      choices: ['あまい', 'すっぱい', 'にがい', 'からい'],
+      answerIndex: 1,
+      explanation: 'レモンは すっぱくて めが さめるよ。',
+    },
+    {
+      question: 'とうがらしの あじは どれ？',
+      choices: ['からい', 'あまい', 'すっぱい', 'やわらかい'],
+      answerIndex: 0,
+      explanation: 'からいものは こどもには むずかしいね。',
+    },
+    {
+      question: 'しおの あじは どれ？',
+      choices: ['にがい', 'しょっぱい', 'あまい', 'すっぱい'],
+      answerIndex: 1,
+      explanation: 'うみの みずも しょっぱいよ。',
+    },
+    {
+      question: 'ピーマンを にがく かんじる ひとも いる。にがいは どの あじ？',
+      choices: ['にがい', 'あまい', 'からい', 'しょっぱい'],
+      answerIndex: 0,
+      explanation: 'コーヒーも にがいけど、おとなは すきだよ。',
+    },
+    {
+      question: 'アイスクリームは どんな たべもの？',
+      choices: ['つめたくて あまい', 'あつくて からい', 'かたくて しょっぱい', 'あたたかい'],
+      answerIndex: 0,
+      explanation: 'アイスは なつの おやつだね。',
+    },
+    {
+      question: 'スープは どんな たべもの？',
+      choices: ['つめたい', 'あたたかい', 'かたい', 'からいだけ'],
+      answerIndex: 1,
+      explanation: 'あたたかい スープは からだを あたためるよ。',
+    },
+    {
+      question: 'プリンは どんな たべもの？',
+      choices: ['かたくて からい', 'やわらかくて あまい', 'すっぱくて つめたい', 'しょっぱい'],
+      answerIndex: 1,
+      explanation: 'プリンは プルプルして いるよ。',
+    },
   ],
 };
