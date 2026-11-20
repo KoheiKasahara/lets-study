@@ -113,5 +113,53 @@ export const sportsQuiz: CategoryQuiz = {
       answerIndex: 3,
       explanation: 'ヘルメットで あたまを まもろうね。',
     },
+    {
+      question: 'おすもうさんは どこで たたかう？',
+      choices: ['どひょう', 'リング', 'コート', 'プール'],
+      answerIndex: 0,
+      explanation: 'どひょうは まるい わの なかだよ。',
+    },
+    {
+      question: 'じゅうどうで なげる わざを つかう スポーツは どれ？',
+      choices: ['じゅうどう', 'けんどう', 'からて', 'すもう'],
+      answerIndex: 0,
+      explanation: 'じゅうどうは あいてを なげたり おさえたり するよ。',
+    },
+    {
+      question: 'しな（たけの けん）で たたかう スポーツは どれ？',
+      choices: ['けんどう', 'じゅうどう', 'からて', 'ボクシング'],
+      answerIndex: 0,
+      explanation: 'けんどうは めんを つけて おこなうよ。',
+    },
+    {
+      question: 'からてで つかうのは どれ？',
+      choices: ['てや あしの わざ', 'ボール', 'ラケット', 'バット'],
+      answerIndex: 0,
+      explanation: 'からては かた（かたち）の れんしゅうも するよ。',
+    },
+    {
+      question: 'バレーボールは ネットの うえに なにを する？',
+      choices: ['ボールを うちかえす', 'ボールを ける', 'ボールを なげいれる', 'ボールを もつ'],
+      answerIndex: 0,
+      explanation: 'バレーボールは 3かいまで タッチできるよ。',
+    },
+    {
+      question: 'ドッジボールで あたると どう なる？',
+      choices: ['そとに でる', 'ゴールに なる', 'つづけられる', 'ポイントが はいる'],
+      answerIndex: 0,
+      explanation: 'そとから なげることも できるよ。',
+    },
+    {
+      question: 'ながい きょりを はしる レースは どれ？',
+      choices: ['マラソン', 'かけっこ', 'リレー', 'たかとび'],
+      answerIndex: 0,
+      explanation: 'マラソンは 42キロも はしるよ。すごいね。',
+    },
+    {
+      question: 'リレーで つぎの ひとに わたすのは どれ？',
+      choices: ['バトン', 'ボール', 'なわ', 'ふだ'],
+      answerIndex: 0,
+      explanation: 'バトンを おとさないように わたそうね。',
+    },
   ],
 };

@@ -170,5 +170,46 @@ export const insectsQuiz: CategoryQuiz = {
       answerIndex: 2,
       explanation: 'からに かくれて、からだを まもるよ。',
     },
+    {
+      question: 'ちょうに なる じゅんばんは どれ？',
+      choices: [
+        'たまご→あおむし→さなぎ→ちょう',
+        'さなぎ→たまご→ちょう→あおむし',
+        'あおむし→たまご→ちょう→さなぎ',
+        'ちょう→さなぎ→あおむし→たまご',
+      ],
+      answerIndex: 0,
+      explanation: 'ちょうは かたちを かえて そだつよ。',
+    },
+    {
+      question: 'かぶとむしの ようちゅうは どこに いる？',
+      choices: ['つちの なか', 'みずの なか', 'きの てっぺん', 'はなの なか'],
+      answerIndex: 0,
+      explanation: 'ようちゅうは つちの なかで そだつよ。',
+    },
+    {
+      question: 'てんとうむしが たべる むしは どれ？',
+      choices: ['アブラムシ', 'ちょう', 'かぶとむし', 'あり'],
+      answerIndex: 0,
+      explanation: 'てんとうむしは のうかの みかただよ。',
+    },
+    {
+      question: 'みつばちの むれの まんなかに いるのは だれ？',
+      choices: ['じょおうばち', 'あり', 'ちょう', 'かまきり'],
+      answerIndex: 0,
+      explanation: 'じょおうばちは たまごを うむよ。',
+    },
+    {
+      question: 'ありの すは どこに ある？',
+      choices: ['じめんの した', 'きの うえ', 'みずの なか', 'そら'],
+      answerIndex: 0,
+      explanation: 'ありの すには たくさんの へやが あるよ。',
+    },
+    {
+      question: 'せみの ようちゅうは どこで そだつ？',
+      choices: ['つちの なか', 'みずの なか', 'はっぱの うえ', 'ゆきの なか'],
+      answerIndex: 0,
+      explanation: 'せみは つちの なかで ながい じかん そだつよ。',
+    },
   ],
 };

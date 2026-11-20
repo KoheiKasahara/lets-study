@@ -1,7 +1,7 @@
 import type { CategoryQuiz } from '../../types';
 import { defaultDifficulties } from './difficulties';
 
-/** にほんクイズ：日本の山・場所・食べ物などのテキスト問題（14問） */
+/** にほんクイズ：日本の山・場所・食べ物などのテキスト問題（22問） */
 export const japanQuiz: CategoryQuiz = {
   category: {
     id: 'japan',
@@ -100,6 +100,54 @@ export const japanQuiz: CategoryQuiz = {
       choices: ['ピアノ', 'ギター', 'しゃみせん', 'バイオリン'],
       answerIndex: 2,
       explanation: 'しゃみせんは 3ほんの げんを はじいて ならすよ。',
+    },
+    {
+      question: 'にほんで いちばん おおきな しまは どれ？',
+      choices: ['ほんしゅう', 'ほっかいどう', 'きゅうしゅう', 'おきなわ'],
+      answerIndex: 0,
+      explanation: 'ほんしゅうは にほんで いちばん おおきい しまだよ。',
+    },
+    {
+      question: 'にほんの おかねの たんいは なに？',
+      choices: ['えん', 'ドル', 'ユーロ', 'ポンド'],
+      answerIndex: 0,
+      explanation: 'にほんでは「えん」を つかうよ。',
+    },
+    {
+      question: 'おまつりで みる、そらに あがる ひかりは どれ？',
+      choices: ['はなび', 'たいよう', 'つき', 'ほし'],
+      answerIndex: 0,
+      explanation: 'はなびは よるの そらに パッと ひろがるよ。',
+    },
+    {
+      question: 'こいのぼりを あげるのは いつ？',
+      choices: ['こどものひ', 'おしょうがつ', 'ハロウィン', 'クリスマス'],
+      answerIndex: 0,
+      explanation: 'こどものひは 5がつ5か。こいのぼりが そらを およぐよ。',
+    },
+    {
+      question: 'たなばたは いつ？',
+      choices: ['7がつ7か', '12がつ25にち', '1がつ1にち', '3がつ3か'],
+      answerIndex: 0,
+      explanation: 'たなばたは 7がつ7か。おりひめと ひこぼしの おはなしだよ。',
+    },
+    {
+      question: 'ひなまつりは いつ？',
+      choices: ['3がつ3か', '7がつ7か', '12がつ25にち', '1がつ1にち'],
+      answerIndex: 0,
+      explanation: 'ひなまつりは 3がつ3か。ひなにんぎょうを かざるよ。',
+    },
+    {
+      question: 'せつぶんで まくのは なに？',
+      choices: ['まめ', 'あめ', 'こめ', 'すな'],
+      answerIndex: 0,
+      explanation: '「おにわ そと！」と いって、まめを まくよ。',
+    },
+    {
+      question: 'すもうで、どひょうに あがるのは だれ？',
+      choices: ['りきし', 'せんせい', 'おいしゃさん', 'パイロット'],
+      answerIndex: 0,
+      explanation: 'りきしは どひょうで おしあいを するよ。',
     },
   ],
 };

@@ -276,5 +276,53 @@ export const numbersQuiz: CategoryQuiz = {
       answerIndex: 0,
       explanation: '1、2、3と かぞえるよ。',
     },
+    {
+      question: '10が 3つで いくつ？',
+      choices: ['20', '30', '40', '13'],
+      answerIndex: 1,
+      explanation: '10、20、30と かぞえるよ。',
+    },
+    {
+      question: '10が 10こで いくつ？',
+      choices: ['90', '100', '110', '1000'],
+      answerIndex: 1,
+      explanation: '10が 10こ あつまると 100だよ。',
+    },
+    {
+      question: '99の つぎの かずは なあに？',
+      choices: ['100', '98', '1000', '90'],
+      answerIndex: 0,
+      explanation: '99の つぎは 100だよ。おおきいね。',
+    },
+    {
+      question: '2けたで いちばん おおきい かずは なあに？',
+      choices: ['99', '100', '90', '89'],
+      answerIndex: 0,
+      explanation: '2けたは 10から 99までだよ。',
+    },
+    {
+      question: '50は 10が なんこ？',
+      choices: ['4こ', '5こ', '6こ', '10こ'],
+      answerIndex: 1,
+      explanation: '10、20、30、40、50で 5こだよ。',
+    },
+    {
+      question: '25と 26では、どちらが おおきい？',
+      choices: ['25', '26', 'おなじ', 'どちらでもない'],
+      answerIndex: 1,
+      explanation: '26の ほうが 1つ おおいよ。',
+    },
+    {
+      question: '45の まえの かずは なあに？',
+      choices: ['46', '44', '45', '54'],
+      answerIndex: 1,
+      explanation: '44、45と つづくよ。',
+    },
+    {
+      question: '100は 1が なんこ あつまった かず？',
+      choices: ['10こ', '50こ', '100こ', '1000こ'],
+      answerIndex: 2,
+      explanation: '1が 100こで 100だよ。',
+    },
   ],
 };

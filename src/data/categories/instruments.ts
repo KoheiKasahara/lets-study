@@ -134,5 +134,41 @@ export const instrumentsQuiz: CategoryQuiz = {
       answerIndex: 1,
       explanation: 'オーケストラは、たくさんの がっきで いっしょに えんそうするよ。',
     },
+    {
+      question: 'がっこうで ふく、たてに もつ かんがっきは どれ？',
+      choices: ['リコーダー', 'トランペット', 'フルート', 'ホルン'],
+      answerIndex: 0,
+      explanation: 'リコーダーは ゆびで あなを ふさぐよ。',
+    },
+    {
+      question: 'おおきな ハープは どうやって ならす？',
+      choices: ['げんを ゆびで はじく', 'たたく', 'ふく', 'こする'],
+      answerIndex: 0,
+      explanation: 'ハープは たくさんの げんが あるよ。',
+    },
+    {
+      question: 'バイオリンより おおきい、ひくい おとの がっきは どれ？',
+      choices: ['チェロ', 'フルート', 'トライアングル', 'カスタネット'],
+      answerIndex: 0,
+      explanation: 'チェロは ゆかに おいて えんそうするよ。',
+    },
+    {
+      question: 'まきまきに なった かたちは なに？',
+      choices: ['トランペット', 'ホルン', 'フルート', 'クラリネット'],
+      answerIndex: 1,
+      explanation: 'ホルンは まるい かたちが めじるしだよ。',
+    },
+    {
+      question: 'くろい かんに ゆびあなが ある かんがっきは どれ？',
+      choices: ['クラリネット', 'ホルン', 'トランペット', 'たいこ'],
+      answerIndex: 0,
+      explanation: 'クラリネットは やわらかい おとが するよ。',
+    },
+    {
+      question: 'オルガンは どこで みることが おおい？',
+      choices: ['きょうかいや コンサートホール', 'プール', 'こうえん', 'えき'],
+      answerIndex: 0,
+      explanation: 'パイプオルガンは とても おおきいよ。',
+    },
   ],
 };

@@ -108,5 +108,46 @@ export const townQuiz: CategoryQuiz = {
       answerIndex: 3,
       explanation: 'びょういんで おいしゃさんに みて もらおうね。',
     },
+    {
+      question: 'ゆうびんポストは なにいろ？',
+      choices: ['あか', 'あお', 'きいろ', 'みどり'],
+      answerIndex: 0,
+      explanation: 'ポストは あかくて めだつよ。',
+    },
+    {
+      question: 'まちの あんぜんを まもる ひとが いるのは どこ？',
+      choices: ['こうばん', 'パンや', 'としょかん', 'こうえん'],
+      answerIndex: 0,
+      explanation: 'こうばんでは みちを きくことも できるよ。',
+    },
+    {
+      question: 'かじの ときに しょうぼうしゃが くるのは どこから？',
+      choices: ['びょういん', 'しょうぼうしょ', 'がっこう', 'えき'],
+      answerIndex: 1,
+      explanation: 'しょうぼうしょは まちを まもる たいせつな ばしょだよ。',
+    },
+    {
+      question: 'おおきな デパートは どんな ところ？',
+      choices: ['いろいろな おみせが はいった たてもの', 'がっこう', 'びょういん', 'じんじゃ'],
+      answerIndex: 0,
+      explanation: 'デパートでは かいものが たのしめるよ。',
+    },
+    {
+      question: 'コンビニは どんな おみせ？',
+      choices: [
+        'ながい じかん あいて いる ちいさな おみせ',
+        'ほんだけの おみせ',
+        'はなだけの おみせ',
+        'さかなだけの おみせ',
+      ],
+      answerIndex: 0,
+      explanation: 'コンビニは よるも あいて いて べんりだよ。',
+    },
+    {
+      question: 'おまつりを する ことが ある、かみさまの いる たてものは どれ？',
+      choices: ['じんじゃ', 'ぎんこう', 'えき', 'プール'],
+      answerIndex: 0,
+      explanation: 'じんじゃでは おまいりを するよ。',
+    },
   ],
 };

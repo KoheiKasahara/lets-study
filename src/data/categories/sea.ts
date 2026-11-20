@@ -178,5 +178,41 @@ export const seaQuiz: CategoryQuiz = {
       explanation:
         'ペンギンは つめたい うみの ちかくに すむ ことが おおいよ。とべないけど およぎは とくいだよ。',
     },
+    {
+      question: 'しんかいで ひかる さかなは どれ？',
+      choices: ['ちょうちんあんこう', 'さんま', 'あじ', 'いわし'],
+      answerIndex: 0,
+      explanation: 'あたまの ちょうちんで さかなを よぶよ。',
+    },
+    {
+      question: 'とても おおきい イカは どれ？',
+      choices: ['ダイオウイカ', 'ホタルイカ', 'スルメイカ', 'コウイカ'],
+      answerIndex: 0,
+      explanation: 'ダイオウイカは 10メートルを こえることも あるよ。',
+    },
+    {
+      question: 'ながーい からだの さかなは どれ？',
+      choices: ['リュウグウノツカイ', 'マンボウ', 'さんま', 'かれい'],
+      answerIndex: 0,
+      explanation: 'リュウグウノツカイは めったに みられないよ。',
+    },
+    {
+      question: 'まるくて およぎが ゆっくりな さかなは どれ？',
+      choices: ['マンボウ', 'まぐろ', 'かつお', 'ぶり'],
+      answerIndex: 0,
+      explanation: 'マンボウは ひらべったくて まるいよ。',
+    },
+    {
+      question: 'むかしから いきて いる「いきた かせき」の さかなは どれ？',
+      choices: ['シーラカンス', 'さんま', 'あじ', 'たい'],
+      answerIndex: 0,
+      explanation: 'シーラカンスは しんかいに すむよ。',
+    },
+    {
+      question: 'てんしの ような かたちの、ちいさな いきものは どれ？',
+      choices: ['クリオネ', 'くらげ', 'ひとで', 'うみがめ'],
+      answerIndex: 0,
+      explanation: 'クリオネは つめたい うみに すむよ。',
+    },
   ],
 };

@@ -1,7 +1,7 @@
 import type { CategoryQuiz } from '../../types';
 import { defaultDifficulties } from './difficulties';
 
-/** おしごとクイズ：まちで働く人たちの仕事のテキスト問題（18問） */
+/** おしごとクイズ：まちで働く人たちの仕事のテキスト問題（38問） */
 export const jobsQuiz: CategoryQuiz = {
   category: {
     id: 'jobs',
@@ -167,6 +167,84 @@ export const jobsQuiz: CategoryQuiz = {
       choices: ['きしゃ', 'はなやさん', 'りょうし', 'パティシエ'],
       answerIndex: 0,
       explanation: 'きしゃは ひとに はなしを きいて きじを かくよ。',
+    },
+    {
+      question: 'ほいくえんで こどもを みて くれるのは だれ？',
+      choices: ['ほいくしさん', 'パイロット', 'りょうしさん', 'だいくさん'],
+      answerIndex: 0,
+      explanation:
+        'ほいくしさんは いっしょに あそんだり、ごはんや おひるねの おせわを したり するよ。',
+    },
+    {
+      question: 'どうぶつの びょうきを みて くれるのは だれ？',
+      choices: ['おいしゃさん', 'じゅういさん', 'せんせい', 'えきいんさん'],
+      answerIndex: 1,
+      explanation: 'じゅういさんは どうぶつの おいしゃさんだよ。',
+    },
+    {
+      question: 'やさいや くだものを うる おみせの ひとは だれ？',
+      choices: ['パンやさん', 'やおやさん', 'ほんやさん', 'さかなやさん'],
+      answerIndex: 1,
+      explanation: 'やおやさんには あさとれた やさいが ならぶよ。',
+    },
+    {
+      question: 'さかなを うる おみせの ひとは だれ？',
+      choices: ['さかなやさん', 'はなやさん', 'ほんやさん', 'くすりやさん'],
+      answerIndex: 0,
+      explanation: 'さかなやさんには あたらしい さかなが ならぶよ。',
+    },
+    {
+      question: 'ほんを うる おみせの ひとは だれ？',
+      choices: ['パンやさん', 'やおやさん', 'ほんやさん', 'さかなやさん'],
+      answerIndex: 2,
+      explanation: 'ほんやさんには えほんも たくさん あるよ。',
+    },
+    {
+      question: 'くすりを わたして くれるのは だれ？',
+      choices: ['やくざいしさん', 'だいくさん', 'うんてんしゅさん', 'しいくいん'],
+      answerIndex: 0,
+      explanation: 'やくざいしさんは くすりの つかいかたを おしえて くれるよ。',
+    },
+    {
+      question: 'えを かく おしごとは だれ？',
+      choices: ['えかきさん', 'きしゃ', 'パイロット', 'せいそういんさん'],
+      answerIndex: 0,
+      explanation: 'えかきさんは いろいろな えを かくよ。',
+    },
+    {
+      question: 'ほんの おはなしを かくのは だれ？',
+      choices: ['さっかさん', 'ピアニスト', 'りょうしさん', 'えきいんさん'],
+      answerIndex: 0,
+      explanation: 'さっかさんは おはなしを かんがえて ほんに するよ。',
+    },
+    {
+      question: 'タクシーを うんてんするのは だれ？',
+      choices: [
+        'バスの うんてんしゅさん',
+        'タクシーの うんてんしゅさん',
+        'パイロット',
+        'せんちょう',
+      ],
+      answerIndex: 1,
+      explanation: 'タクシーの うんてんしゅさんは いきたい ところまで はこんで くれるよ。',
+    },
+    {
+      question: 'おどりを おどる おしごとは だれ？',
+      choices: ['ダンサー', 'コックさん', 'だいくさん', 'かんごしさん'],
+      answerIndex: 0,
+      explanation: 'ダンサーは おんがくに あわせて おどるよ。',
+    },
+    {
+      question: 'やきゅうで ボールを なげるのは だれ？',
+      choices: ['サッカーせんしゅ', 'やきゅうせんしゅ', 'すいえいせんしゅ', 'スキーせんしゅ'],
+      answerIndex: 1,
+      explanation: 'やきゅうせんしゅは バットで ボールを うつよ。',
+    },
+    {
+      question: 'ホテルで おきゃくさんを むかえるのは だれ？',
+      choices: ['ホテルの ひと', 'りょうしさん', 'のうかさん', 'だいくさん'],
+      answerIndex: 0,
+      explanation: 'ホテルの ひとは おへやの あんないを して くれるよ。',
     },
   ],
 };
