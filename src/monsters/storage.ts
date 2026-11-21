@@ -1,3 +1,4 @@
+import { sanitizePartyIds } from './party';
 import { speciesById } from './species';
 import type { MonsterSave, OwnedMonster } from './types';
 
@@ -17,7 +18,7 @@ export interface StorageLike {
 
 /** 空の育成データ */
 export function emptyMonsterSave(): MonsterSave {
-  return { monsters: [], totalCorrect: 0, eggs: 0, trophies: 0, nextId: 1 };
+  return { monsters: [], partyIds: [], totalCorrect: 0, eggs: 0, trophies: 0, nextId: 1 };
 }
 
 function defaultStorage(): StorageLike | undefined {
@@ -70,8 +71,17 @@ export function loadMonsterSave(storage: StorageLike | undefined = defaultStorag
           .filter((monster): monster is OwnedMonster => monster !== undefined)
       : [];
     const fallbackNextId = monsters.length + 1;
+    // 旧セーブには partyIds がないので空パーティとして読み込む（後方互換）。
+    // 存在しないモンスターや重複は sanitizePartyIds が取り除く
+    const partyIds = Array.isArray(parsed.partyIds)
+      ? sanitizePartyIds(
+          parsed.partyIds.filter((id): id is string => typeof id === 'string'),
+          monsters,
+        )
+      : [];
     return {
       monsters,
+      partyIds,
       totalCorrect: toNonNegativeInt(parsed.totalCorrect, 0),
       eggs: toNonNegativeInt(parsed.eggs, 0),
       trophies: toNonNegativeInt(parsed.trophies, 0),

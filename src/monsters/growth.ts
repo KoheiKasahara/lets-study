@@ -55,6 +55,18 @@ export function levelProgress(xp: number): number {
   return (xp - current) / (next - current);
 }
 
+/** 次のレベルまであと何 XP か。最大レベルでは null */
+export function xpUntilNextLevel(xp: number): number | null {
+  const level = levelFromXp(xp);
+  if (level >= MAX_LEVEL) return null;
+  return xpToReachLevel(level + 1) - xp;
+}
+
+/** 次のたまごまであと何問正解すればいいか（ちょうど倍数のときは次の1つぶん丸ごと） */
+export function correctUntilNextEgg(totalCorrect: number): number {
+  return EGG_EVERY_CORRECT - (totalCorrect % EGG_EVERY_CORRECT);
+}
+
 /**
  * 表示名。純粋種（世代1）は進化に合わせて段階ごとの名前になり、
  * 配合モンスターは生まれたときの合成名のまま。
@@ -153,10 +165,20 @@ export function applyQuizResult(
 
 /** モンスター1匹だけに経験値を足す（闘技場の報酬用） */
 export function addXpToMonster(save: MonsterSave, monsterId: string, xp: number): MonsterSave {
+  return addXpToMonsters(save, [monsterId], xp);
+}
+
+/** 指定したモンスター全員に経験値を足す（闘技場のチーム戦の報酬用） */
+export function addXpToMonsters(
+  save: MonsterSave,
+  monsterIds: readonly string[],
+  xp: number,
+): MonsterSave {
+  const targets = new Set(monsterIds);
   return {
     ...save,
     monsters: save.monsters.map((monster) =>
-      monster.id === monsterId ? { ...monster, xp: monster.xp + xp } : monster,
+      targets.has(monster.id) ? { ...monster, xp: monster.xp + xp } : monster,
     ),
   };
 }

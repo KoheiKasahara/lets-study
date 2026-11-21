@@ -35,6 +35,72 @@
   color: var(--color-text-sub);
 }
 
+/* ---------- パーティ戦の開始 ---------- */
+
+.arena__party-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+}
+
+.arena__party-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.arena__party-order {
+  font-size: var(--font-s);
+  font-weight: 700;
+}
+
+.arena__party-figure {
+  width: min(88px, 24vw);
+}
+
+.arena__party-name {
+  font-size: var(--font-s);
+  font-weight: 700;
+}
+
+.arena__start {
+  display: flex;
+  justify-content: center;
+}
+
+/* 出番待ち・ねむった仲間の小さな姿 */
+.arena__bench {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--space-5);
+}
+
+.arena__bench-member {
+  position: relative;
+  display: block;
+  width: min(40px, 12vw);
+}
+
+.arena__bench-member.is-sleeping {
+  opacity: 0.55;
+}
+
+.arena__bench-sleep {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: var(--font-xs);
+}
+
+/* 速さ切り替え */
+.arena__speed {
+  display: flex;
+  justify-content: center;
+}
+
 /* ---------- バトル ---------- */
 
 .arena__stage {
@@ -196,6 +262,10 @@
 @media (max-height: 480px) {
   .arena__figure {
     width: min(96px, 44%);
+  }
+
+  .arena__party-figure {
+    width: min(56px, 18vw);
   }
 
   .arena__log {

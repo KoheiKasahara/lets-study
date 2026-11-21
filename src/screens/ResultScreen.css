@@ -79,6 +79,11 @@
   color: var(--color-correct);
 }
 
+.result__monster-more {
+  font-size: var(--font-s);
+  color: var(--color-text-sub);
+}
+
 .result__egg {
   font-size: var(--font-m);
   font-weight: 700;

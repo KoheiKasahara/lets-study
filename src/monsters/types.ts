@@ -41,6 +41,8 @@ export interface OwnedMonster {
 /** localStorage に保存する育成データ全体 */
 export interface MonsterSave {
   monsters: OwnedMonster[];
+  /** パーティに入っているモンスターのID（並び順＝闘技場で戦う順番、最大 PARTY_MAX_SIZE 匹） */
+  partyIds: string[];
   /** 累計正解数（たまごの判定に使う） */
   totalCorrect: number;
   /** 持っているたまごの数 */
