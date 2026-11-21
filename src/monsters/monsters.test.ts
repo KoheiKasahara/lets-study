@@ -3,11 +3,15 @@ import {
   PIXEL_SIZE,
   SPECIES,
   addXpToMonster,
+  addXpToMonsters,
   applyQuizResult,
   combineNames,
+  correctUntilNextEgg,
   createBattle,
   createCpuMonster,
+  createCpuTeam,
   createPureMonster,
+  createTeamBattle,
   damageFor,
   displayName,
   emptyMonsterSave,
@@ -15,13 +19,17 @@ import {
   levelFromXp,
   levelProgress,
   loadMonsterSave,
+  partyMonstersOf,
   pickHatchSpecies,
+  sanitizePartyIds,
   saveMonsterSave,
   stageForLevel,
   statsFor,
   stepBattle,
+  togglePartyMember,
   xpGainForBlock,
   xpToReachLevel,
+  xpUntilNextLevel,
   type MonsterSave,
   type StorageLike,
 } from './index';
@@ -268,6 +276,130 @@ describe('バトル', () => {
     const cpuLv1 = createCpuMonster(1, sequenceRandom([0, 0]));
     expect(levelFromXp(cpuLv1.xp)).toBe(1);
   });
+
+  it('1対1はチーム長1のチーム戦として扱われる', () => {
+    const battle = createBattle(createPureMonster('honoo', 'm1'), createPureMonster('mizu', 'm2'));
+    expect(battle.playerTeam).toHaveLength(1);
+    expect(battle.cpuTeam).toHaveLength(1);
+    expect(battle.player).toBe(battle.playerTeam[0]);
+    expect(battle.cpu).toBe(battle.cpuTeam[0]);
+  });
+
+  it('CPUチームは指定した数だけ、重ならないIDで作られる', () => {
+    const team = createCpuTeam(5, 3, sequenceRandom([0.3]));
+    expect(team).toHaveLength(3);
+    expect(new Set(team.map((monster) => monster.id)).size).toBe(3);
+    for (const monster of team) {
+      const level = levelFromXp(monster.xp);
+      expect(level).toBeGreaterThanOrEqual(4);
+      expect(level).toBeLessThanOrEqual(6);
+    }
+  });
+
+  it('チーム戦：ねむったら次のメンバーが出てきて、全員ねむったら終わる', () => {
+    const strong = { ...createPureMonster('honoo', 'p1'), xp: xpToReachLevel(10) };
+    const strong2 = { ...createPureMonster('mizu', 'p2'), xp: xpToReachLevel(10) };
+    const weak1 = createPureMonster('happa', 'c1');
+    const weak2 = createPureMonster('hoshi', 'c2');
+    let battle = createTeamBattle([strong, strong2], [weak1, weak2]);
+    expect(battle.playerTeam).toHaveLength(2);
+    expect(battle.cpuTeam).toHaveLength(2);
+    let sawSwitch = false;
+    let guard = 0;
+    while (!battle.finished && guard < 500) {
+      battle = stepBattle(battle, sequenceRandom([0.5]));
+      if (battle.cpuIndex === 1) sawSwitch = true;
+      guard += 1;
+    }
+    expect(battle.finished).toBe(true);
+    expect(battle.winner).toBe('player');
+    // CPUの1匹目がねむって2匹目が出てきた
+    expect(sawSwitch).toBe(true);
+    expect(battle.actions.some((action) => action.message.includes('でてきた'))).toBe(true);
+    // CPUは全員ねむっている
+    expect(battle.cpuTeam.every((combatant) => combatant.hp === 0)).toBe(true);
+    expect(battle.cpu.hp).toBe(0);
+  });
+
+  it('チーム戦：プレイヤー側も ねむったら次のメンバーに交代する', () => {
+    const weakPlayer = createPureMonster('happa', 'p1');
+    const strongPlayer = { ...createPureMonster('honoo', 'p2'), xp: xpToReachLevel(10) };
+    const strongCpu = { ...createPureMonster('iwa', 'c1'), xp: xpToReachLevel(10) };
+    let battle = createTeamBattle([weakPlayer, strongPlayer], [strongCpu]);
+    let sawSwitch = false;
+    let guard = 0;
+    while (!battle.finished && guard < 500) {
+      battle = stepBattle(battle, sequenceRandom([0.5]));
+      if (battle.playerIndex === 1) sawSwitch = true;
+      guard += 1;
+    }
+    expect(sawSwitch).toBe(true);
+    expect(battle.player.monster.id).toBe('p2');
+    expect(battle.finished).toBe(true);
+  });
+});
+
+describe('パーティ', () => {
+  const monsters = [
+    createPureMonster('honoo', 'm1'),
+    createPureMonster('mizu', 'm2'),
+    createPureMonster('happa', 'm3'),
+    createPureMonster('denki', 'm4'),
+  ];
+
+  it('出し入れできる（追加・取り外し・満杯では追加できない）', () => {
+    let party = togglePartyMember([], 'm1');
+    expect(party).toEqual(['m1']);
+    party = togglePartyMember(party, 'm2');
+    party = togglePartyMember(party, 'm3');
+    expect(party).toEqual(['m1', 'm2', 'm3']);
+    // 満杯（3匹）では追加できない
+    expect(togglePartyMember(party, 'm4')).toEqual(['m1', 'm2', 'm3']);
+    // 外すと空きができる
+    expect(togglePartyMember(party, 'm2')).toEqual(['m1', 'm3']);
+  });
+
+  it('sanitizePartyIds は重複・存在しないID・上限超えを取り除く', () => {
+    expect(sanitizePartyIds(['m2', 'm1', 'm2', 'unknown', 'm3', 'm4'], monsters)).toEqual([
+      'm2',
+      'm1',
+      'm3',
+    ]);
+    expect(sanitizePartyIds([], monsters)).toEqual([]);
+  });
+
+  it('partyMonstersOf は並び順に取り出す', () => {
+    const save: MonsterSave = { ...emptyMonsterSave(), monsters, partyIds: ['m3', 'm1'] };
+    expect(partyMonstersOf(save).map((monster) => monster.id)).toEqual(['m3', 'm1']);
+  });
+});
+
+describe('成長の補助計算', () => {
+  it('次のレベルまであと何XPか（最大レベルは null）', () => {
+    expect(xpUntilNextLevel(0)).toBe(xpToReachLevel(2));
+    expect(xpUntilNextLevel(xpToReachLevel(5))).toBe(xpToReachLevel(6) - xpToReachLevel(5));
+    expect(xpUntilNextLevel(xpToReachLevel(30))).toBeNull();
+  });
+
+  it('次のたまごまであと何問正解すればいいか', () => {
+    expect(correctUntilNextEgg(0)).toBe(30);
+    expect(correctUntilNextEgg(25)).toBe(5);
+    expect(correctUntilNextEgg(29)).toBe(1);
+    expect(correctUntilNextEgg(30)).toBe(30);
+  });
+
+  it('addXpToMonsters は指定した全員にだけ経験値を足す', () => {
+    const save: MonsterSave = {
+      ...emptyMonsterSave(),
+      monsters: [
+        createPureMonster('honoo', 'm1'),
+        createPureMonster('mizu', 'm2'),
+        createPureMonster('happa', 'm3'),
+      ],
+    };
+    const next = addXpToMonsters(save, ['m1', 'm3'], 20);
+    expect(next.monsters.map((monster) => monster.xp)).toEqual([20, 0, 20]);
+  });
 });
 
 describe('保存', () => {
@@ -286,6 +418,7 @@ describe('保存', () => {
     const storage = memoryStorage();
     const save: MonsterSave = {
       monsters: [createPureMonster('hoshi', 'm1')],
+      partyIds: ['m1'],
       totalCorrect: 42,
       eggs: 1,
       trophies: 3,
@@ -293,6 +426,56 @@ describe('保存', () => {
     };
     saveMonsterSave(save, storage);
     expect(loadMonsterSave(storage)).toEqual(save);
+  });
+
+  it('旧セーブ（partyIdsなし）は空パーティとして読み込める', () => {
+    const storage = memoryStorage();
+    storage.setItem(
+      'lets-study:monsters:v1',
+      JSON.stringify({
+        monsters: [
+          {
+            id: 'm1',
+            shapeSpeciesId: 'honoo',
+            colorSpeciesId: 'honoo',
+            name: 'ひのこ',
+            xp: 0,
+            generation: 1,
+          },
+        ],
+        totalCorrect: 5,
+        eggs: 0,
+        trophies: 0,
+        nextId: 2,
+      }),
+    );
+    const loaded = loadMonsterSave(storage);
+    expect(loaded.monsters).toHaveLength(1);
+    expect(loaded.partyIds).toEqual([]);
+  });
+
+  it('partyIds の重複・存在しないID・上限超えは読み込み時に取り除かれる', () => {
+    const storage = memoryStorage();
+    const monsterJson = (id: string) => ({
+      id,
+      shapeSpeciesId: 'honoo',
+      colorSpeciesId: 'honoo',
+      name: 'ひのこ',
+      xp: 0,
+      generation: 1,
+    });
+    storage.setItem(
+      'lets-study:monsters:v1',
+      JSON.stringify({
+        monsters: [monsterJson('m1'), monsterJson('m2'), monsterJson('m3'), monsterJson('m4')],
+        partyIds: ['m2', 'm2', 'ghost', 'm1', 'm3', 'm4'],
+        totalCorrect: 0,
+        eggs: 0,
+        trophies: 0,
+        nextId: 5,
+      }),
+    );
+    expect(loadMonsterSave(storage).partyIds).toEqual(['m2', 'm1', 'm3']);
   });
 
   it('壊れたJSONでも空データで落ちない', () => {

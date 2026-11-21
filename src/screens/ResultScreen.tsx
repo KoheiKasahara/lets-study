@@ -32,6 +32,9 @@ interface Props {
   onHome: () => void;
 }
 
+/** 結果画面で姿を見せるモンスターの上限（多いときは要約にする） */
+const RESULT_MONSTER_LIMIT = 3;
+
 /** 結果画面：セットの結果と累計を表示し、「つづける／もどる」を選べる */
 export function ResultScreen({
   quiz,
@@ -47,6 +50,16 @@ export function ResultScreen({
 }: Props) {
   const { correct, total } = blockResult;
   const evolvedIds = new Set(growth?.evolutions.map((evolution) => evolution.monsterId) ?? []);
+  // 姿を見せるのは先頭3匹まで。進化したモンスターを先に並べて、
+  // 「しんかした！」が要約に埋もれないようにする
+  const shownMonsters = [
+    ...monsters.filter((monster) => evolvedIds.has(monster.id)),
+    ...monsters.filter((monster) => !evolvedIds.has(monster.id)),
+  ].slice(0, RESULT_MONSTER_LIMIT);
+  const hiddenCount = monsters.length - shownMonsters.length;
+  const hiddenEvolvedCount =
+    (growth?.evolutions.length ?? 0) -
+    shownMonsters.filter((monster) => evolvedIds.has(monster.id)).length;
   return (
     <div className="screen result">
       <div className="result__summary">
@@ -74,7 +87,7 @@ export function ResultScreen({
           <div className="result__monsters">
             <p className="result__xp">{growth.xpGain} XP たまった！</p>
             <div className="result__monster-row">
-              {monsters.map((monster) => (
+              {shownMonsters.map((monster) => (
                 <div key={monster.id} className="result__monster">
                   <span className="result__monster-figure">
                     <PixelMonster
@@ -92,6 +105,12 @@ export function ResultScreen({
                 </div>
               ))}
             </div>
+            {hiddenCount > 0 && (
+              <p className="result__monster-more">
+                ほか {hiddenCount}ひきも そだったよ！
+                {hiddenEvolvedCount > 0 && '（✨ しんかした モンスターも いるよ！）'}
+              </p>
+            )}
             {growth.eggsGained > 0 && (
               <p className="result__egg">
                 🥚 たまごを もらった！「モンスターを そだてる」で みてね

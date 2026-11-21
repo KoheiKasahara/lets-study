@@ -14,7 +14,9 @@ export {
   XP_PER_CORRECT,
   XP_PER_WRONG,
   addXpToMonster,
+  addXpToMonsters,
   applyQuizResult,
+  correctUntilNextEgg,
   createPureMonster,
   displayName,
   levelFromXp,
@@ -24,15 +26,25 @@ export {
   stageOfMonster,
   xpGainForBlock,
   xpToReachLevel,
+  xpUntilNextLevel,
 } from './growth';
 export { statsFor } from './stats';
 export { combineNames, fuseMonsters } from './fusion';
+export {
+  PARTY_MAX_SIZE,
+  partyMonstersFromIds,
+  partyMonstersOf,
+  sanitizePartyIds,
+  togglePartyMember,
+} from './party';
 export type { BattleAction, BattleState, Combatant } from './battle';
 export {
   BATTLE_LOSE_XP,
   BATTLE_WIN_XP,
   createBattle,
   createCpuMonster,
+  createCpuTeam,
+  createTeamBattle,
   damageFor,
   stepBattle,
 } from './battle';

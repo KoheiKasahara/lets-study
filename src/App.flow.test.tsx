@@ -175,6 +175,76 @@ describe('画面の基本フロー', () => {
     }
   });
 
+  it('とうぎじょう：パーティを組むとチーム戦になり、みんなにXPが入る', () => {
+    localStorage.clear();
+    localStorage.setItem(
+      'lets-study:monsters:v1',
+      JSON.stringify({
+        monsters: [
+          {
+            id: 'a',
+            shapeSpeciesId: 'honoo',
+            colorSpeciesId: 'honoo',
+            name: 'ひのこ',
+            xp: 0,
+            generation: 1,
+          },
+          {
+            id: 'b',
+            shapeSpeciesId: 'mizu',
+            colorSpeciesId: 'mizu',
+            name: 'みずたま',
+            xp: 0,
+            generation: 1,
+          },
+          {
+            id: 'c',
+            shapeSpeciesId: 'happa',
+            colorSpeciesId: 'happa',
+            name: 'はっぱん',
+            xp: 0,
+            generation: 1,
+          },
+        ],
+        totalCorrect: 0,
+        eggs: 0,
+        trophies: 0,
+        nextId: 4,
+      }),
+    );
+    vi.useFakeTimers();
+    try {
+      render(<App />);
+
+      // 育成画面で☆を押して2匹をパーティに入れる
+      fireEvent.click(screen.getByRole('button', { name: /モンスターを そだてる/ }));
+      fireEvent.click(screen.getAllByRole('button', { name: 'パーティに いれる' })[0]);
+      fireEvent.click(screen.getAllByRole('button', { name: 'パーティに いれる' })[0]);
+      expect(screen.getByText('きみの パーティ')).toBeTruthy();
+      expect(screen.getByText('2ばんめ')).toBeTruthy();
+
+      // 闘技場でパーティ戦を始める
+      fireEvent.click(screen.getByRole('button', { name: /もどる/ }));
+      fireEvent.click(screen.getByRole('button', { name: /とうぎじょう/ }));
+      fireEvent.click(screen.getByRole('button', { name: /パーティで たたかう/ }));
+      expect(screen.getByText(/たたかい スタート！/)).toBeTruthy();
+      for (let i = 0; i < 400 && !screen.queryByText(/かった！|がんばったね！/); i++) {
+        act(() => {
+          vi.advanceTimersByTime(1000);
+        });
+      }
+      expect(screen.getByText(/かった！|がんばったね！/)).toBeTruthy();
+      // 参加したパーティ全員に経験値が入る表示
+      expect(screen.getByText(/パーティ みんなに .* XP たまった/)).toBeTruthy();
+
+      // 選び直さず同じパーティでもう一度戦える
+      fireEvent.click(screen.getByRole('button', { name: /おなじ パーティで もういちど/ }));
+      expect(screen.getByText(/たたかい スタート！/)).toBeTruthy();
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
   it('こっき ずかんが開けて、地域フィルターと検索が効く', () => {
     render(<App />);
 

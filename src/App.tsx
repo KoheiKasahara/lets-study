@@ -15,13 +15,14 @@ import {
 import {
   BATTLE_LOSE_XP,
   BATTLE_WIN_XP,
-  addXpToMonster,
+  addXpToMonsters,
   applyQuizResult,
   createPureMonster,
   fuseMonsters,
   loadMonsterSave,
   pickHatchSpecies,
   saveMonsterSave,
+  togglePartyMember,
   type GrowthReport,
   type MonsterSave,
   type OwnedMonster,
@@ -144,9 +145,17 @@ export default function App() {
     return child;
   };
 
-  /** 闘技場の報酬：勝敗どちらの経験値と、勝ったときのトロフィー */
-  const handleBattleEnd = (monsterId: string, won: boolean) => {
-    const withXp = addXpToMonster(monsterSave, monsterId, won ? BATTLE_WIN_XP : BATTLE_LOSE_XP);
+  /** パーティへの出し入れ（最大3匹、並び順が闘技場で戦う順番） */
+  const toggleParty = (monsterId: string) => {
+    updateMonsterSave({
+      ...monsterSave,
+      partyIds: togglePartyMember(monsterSave.partyIds, monsterId),
+    });
+  };
+
+  /** 闘技場の報酬：参加した全員の経験値と、勝ったときのトロフィー */
+  const handleBattleEnd = (monsterIds: string[], won: boolean) => {
+    const withXp = addXpToMonsters(monsterSave, monsterIds, won ? BATTLE_WIN_XP : BATTLE_LOSE_XP);
     updateMonsterSave(won ? { ...withXp, trophies: withXp.trophies + 1 } : withXp);
   };
 
@@ -189,12 +198,14 @@ export default function App() {
           onChooseStarter={chooseStarter}
           onHatch={hatchEgg}
           onFuse={fuse}
+          onToggleParty={toggleParty}
         />
       )}
 
       {screen.name === 'arena' && (
         <ArenaScreen
           monsters={monsterSave.monsters}
+          partyIds={monsterSave.partyIds}
           trophies={monsterSave.trophies}
           onBack={() => setScreen({ name: 'home' })}
           onBattleEnd={handleBattleEnd}
